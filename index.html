@@ -267,6 +267,30 @@
     .agenda-list strong { display: block; font-weight: 600; }
     .agenda-list span { color: var(--muted); font-size: .95rem; }
 
+    /* ---------- Asistencia virtual: bloque compacto ---------- */
+    .virtual {
+      background: #f1e4cf;
+      padding: 56px 0;
+    }
+    .virtual .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .virtual h2 { font-size: 1.7rem; margin: 0 0 8px; }
+    .virtual p { margin: 0; color: #4a4f57; max-width: 620px; }
+    .virtual-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      margin-top: 14px;
+      font-size: .95rem;
+      color: var(--brand-dark);
+    }
+    .virtual-meta strong { font-weight: 600; }
+    .virtual .btn { flex: 0 0 auto; }
+
     /* ---------- Responsive ---------- */
     @media (max-width: 820px) {
       .hero { grid-template-columns: 1fr; min-height: 0; }
@@ -274,6 +298,8 @@
       .photo-panel { order: -1; height: 40vh; }
       .agenda { grid-template-columns: 1fr; min-height: 0; }
       .agenda-text { padding: 48px 20px; }
+      .virtual { padding: 44px 0; }
+      .virtual .container { flex-direction: column; align-items: flex-start; gap: 24px; }
       .banner nav { display: none; }
     }
     @media (max-width: 560px) {
@@ -373,6 +399,24 @@
       </div>
     </section>
 
+    <!-- ===== Asistencia virtual ===== -->
+    <section class="virtual" id="virtual">
+      <div class="container">
+        <div>
+          <h2>¿No puedes ir? Síguelo online</h2>
+          <p>
+            Transmitiremos el evento en vivo. Inscríbete marcando "Virtual" en el formulario
+            y te enviaremos el link de acceso a tu correo.
+          </p>
+          <div class="virtual-meta">
+            <span><strong>Plataforma:</strong> Zoom</span>
+            <span><strong>Transmisión:</strong> 19:30 – 21:15 hrs</span>
+          </div>
+        </div>
+        <a href="#registro" class="btn">Inscribirme online</a>
+      </div>
+    </section>
+
     <!-- ===== Registro ===== -->
     <section class="block" id="registro">
       <div class="container">
@@ -416,7 +460,8 @@
           <fieldset class="field">
             <legend>¿Asistirás? <span class="req">*</span></legend>
             <div class="radios">
-              <label><input type="radio" name="asistira" value="Sí" required checked /> Sí, ahí estaré</label>
+              <label><input type="radio" name="asistira" value="Presencial" required checked /> Sí, presencial</label>
+              <label><input type="radio" name="asistira" value="Virtual" /> Sí, virtual</label>
               <label><input type="radio" name="asistira" value="No" /> No podré ir</label>
             </div>
           </fieldset>
