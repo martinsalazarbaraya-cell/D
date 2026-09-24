@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nombre del Evento · Invitación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #1f3a5f;
+      --brand-dark: #152a45;
+      --accent: #e0a458;
+      --bg: #f7f5f1;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --muted: #5f6368;
+      --border: #e3dfd8;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ---------- Banner ---------- */
+    .banner {
+      background: var(--brand);
+      color: #fff;
+    }
+    .banner .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 16px;
+    }
+    .banner img { height: 40px; width: auto; }
+    .banner nav a {
+      color: rgba(255,255,255,.85);
+      text-decoration: none;
+      font-size: .95rem;
+      margin-left: 20px;
+    }
+    .banner nav a:hover { color: #fff; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 64px 0 56px; }
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0 0 12px;
+    }
+    h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      margin: 0 0 28px;
+      color: var(--brand-dark);
+    }
+    .details {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      display: grid;
+      gap: 14px;
+    }
+    .details li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .details svg { flex: 0 0 22px; margin-top: 3px; color: var(--brand); }
+    .details strong { display: block; font-weight: 600; }
+    .details span { color: var(--muted); font-size: .95rem; }
+
+    .btn {
+      display: inline-block;
+      background: var(--brand);
+      color: #fff;
+      border: 0;
+      padding: 14px 32px;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .btn:hover { background: var(--brand-dark); transform: translateY(-1px); }
+    .btn:disabled { opacity: .6; cursor: wait; transform: none; }
+
+    .venue-photo {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: linear-gradient(135deg, #c9d6e3, #e8dccb);
+      box-shadow: 0 20px 40px -20px rgba(31,58,95,.45);
+    }
+    .venue-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .venue-photo .placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--brand);
+      font-weight: 500;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* ---------- Secciones ---------- */
+    section.block { padding: 56px 0; }
+    section.block + section.block { border-top: 1px solid var(--border); }
+    h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: 2rem;
+      margin: 0 0 20px;
+      color: var(--brand-dark);
+    }
+    .about p { max-width: 720px; color: #333; font-size: 1.05rem; }
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .highlight {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .highlight strong { display: block; margin-bottom: 4px; color: var(--brand); }
+    .highlight span { color: var(--muted); font-size: .95rem; }
+
+    /* ---------- Formulario ---------- */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      max-width: 720px;
+    }
+    .form-intro { color: var(--muted); margin: -8px 0 24px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .field label, .field legend { font-weight: 500; font-size: .95rem; }
+    .field .req { color: #c0392b; }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      font: inherit;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fcfbf9;
+      color: var(--text);
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--brand);
+      outline-offset: 1px;
+      background: #fff;
+    }
+    textarea { min-height: 96px; resize: vertical; }
+    fieldset { border: 0; padding: 0; margin: 0 0 18px; }
+    .radios { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
+    .radios label { display: flex; gap: 8px; align-items: center; font-weight: 400; cursor: pointer; }
+
+    .form-status {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: none;
+    }
+    .form-status.ok { display: block; background: #e7f5ec; color: #1e6b3a; }
+    .form-status.error { display: block; background: #fdecea; color: #a12a1f; }
+
+    footer {
+      text-align: center;
+      padding: 32px 0 48px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 820px) {
+      .hero { padding: 40px 0; }
+      .hero .container { grid-template-columns: 1fr; gap: 32px; }
+      .highlights { grid-template-columns: 1fr; }
+      .banner nav { display: none; }
+    }
+    @media (max-width: 560px) {
+      .container { padding: 0 16px; }
+      .grid-2 { grid-template-columns: 1fr; gap: 0; }
+      .form-card { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Banner con logo ===== -->
+  <header class="banner">
+    <div class="container">
+      <!-- Reemplaza assets/logo.svg por el logo de tu empresa -->
+      <img src="assets/logo.svg" alt="Logo de la empresa" />
+      <nav>
+        <a href="#about">About</a>
+        <a href="#registro">Registro</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero: título, ubicación, fecha, foto y RSVP ===== -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div>
+          <p class="eyebrow">Estás invitado</p>
+          <h1>Nombre del Evento 2026</h1>
+
+          <ul class="details">
+            <li>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <div>
+                <strong>Nombre del Lugar</strong>
+                <span>Av. Ejemplo 1234, Ciudad</span>
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+              <div>
+                <strong>Jueves 15 de octubre, 2026</strong>
+                <span>19:00 – 22:00 hrs</span>
+              </div>
+            </li>
+          </ul>
+
+          <a href="#registro" class="btn">RSVP</a>
+        </div>
+
+        <!-- Reemplaza assets/lugar.jpg por una foto del lugar -->
+        <div class="venue-photo">
+          <div class="placeholder"><div>Foto del lugar<br><small>(assets/lugar.jpg)</small></div></div>
+          <img src="assets/lugar.jpg" alt="Foto del lugar del evento"
+               onerror="this.remove()" style="position:relative" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="block about" id="about">
+      <div class="container">
+        <h2>About</h2>
+        <p>
+          Aquí va la descripción del evento: de qué se trata, por qué vale la pena venir
+          y qué se van a llevar los asistentes. Dos o tres párrafos cortos funcionan mejor
+          que uno largo.
+        </p>
+        <p>
+          Puedes mencionar a los speakers, la agenda general o cualquier detalle
+          importante (dress code, estacionamiento, etc.).
+        </p>
+
+        <div class="highlights">
+          <div class="highlight"><strong>Networking</strong><span>Conecta con líderes de la industria.</span></div>
+          <div class="highlight"><strong>Charlas</strong><span>Speakers invitados y panel de conversación.</span></div>
+          <div class="highlight"><strong>Cóctel</strong><span>Cierre con cóctel y música en vivo.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Registro ===== -->
+    <section class="block" id="registro">
+      <div class="container">
+        <h2>Registro</h2>
+        <p class="form-intro">Confirma tu asistencia completando el formulario.</p>
+
+        <form class="form-card" id="rsvp-form" novalidate>
+          <div class="grid-2">
+            <div class="field">
+              <label for="nombre">Nombre <span class="req">*</span></label>
+              <input type="text" id="nombre" name="nombre" required autocomplete="given-name" />
+            </div>
+            <div class="field">
+              <label for="apellido">Apellido <span class="req">*</span></label>
+              <input type="text" id="apellido" name="apellido" required autocomplete="family-name" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" name="empresa" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="cargo">Cargo</label>
+              <input type="text" id="cargo" name="cargo" autocomplete="organization-title" />
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend>¿Asistirás? <span class="req">*</span></legend>
+            <div class="radios">
+              <label><input type="radio" name="asistira" value="Sí" required checked /> Sí, ahí estaré</label>
+              <label><input type="radio" name="asistira" value="No" /> No podré ir</label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="acompanantes">¿Vienes con acompañante?</label>
+            <select id="acompanantes" name="acompanantes">
+              <option value="0">No</option>
+              <option value="1">Sí, 1 persona</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="restricciones">Restricciones alimentarias</label>
+            <input type="text" id="restricciones" name="restricciones" placeholder="Vegetariano, celíaco, alergias…" />
+          </div>
+
+          <div class="field">
+            <label for="comentarios">Comentarios o preguntas</label>
+            <textarea id="comentarios" name="comentarios"></textarea>
+          </div>
+
+          <button type="submit" class="btn" id="submit-btn">Confirmar asistencia</button>
+          <div class="form-status" id="form-status" role="status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Tu Empresa · ¿Dudas? Escríbenos a <a href="mailto:eventos@tuempresa.com">eventos@tuempresa.com</a></div>
+  </footer>
+
+  <script>
+    // URL del Web App de Google Apps Script (ver README.md).
+    // Cada registro se agrega como una fila en tu Google Sheet, descargable como Excel.
+    const SCRIPT_URL = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
+
+    const form = document.getElementById("rsvp-form");
+    const statusEl = document.getElementById("form-status");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function showStatus(msg, type) {
+      statusEl.textContent = msg;
+      statusEl.className = "form-status " + type;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (!SCRIPT_URL.startsWith("https://")) {
+        showStatus("Falta configurar SCRIPT_URL en index.html: el registro no se guardó.", "error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando…";
+
+      const data = new URLSearchParams(new FormData(form));
+      data.append("fecha_registro", new Date().toISOString());
+
+      try {
+        // no-cors: Apps Script no devuelve cabeceras CORS; la fila igual se guarda.
+        await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: data });
+        form.reset();
+        showStatus("¡Listo! Tu registro quedó confirmado. Nos vemos pronto.", "ok");
+      } catch (err) {
+        showStatus("No pudimos enviar tu registro. Revisa tu conexión e inténtalo de nuevo.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Confirmar asistencia";
+      }
+    });
+  </script>
+</body>
+</html>
