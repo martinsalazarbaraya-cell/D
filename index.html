@@ -267,6 +267,25 @@
     .agenda-list strong { display: block; font-weight: 600; }
     .agenda-list span { color: var(--muted); font-size: .95rem; }
 
+    /* ---------- Ubicación: franja azul + mapa ---------- */
+    .location-bar {
+      background: var(--brand);
+      color: #fff;
+      padding: 36px 0;
+      text-align: center;
+    }
+    .location-bar h2 { color: #fff; margin: 0 0 6px; }
+    .location-bar p { margin: 0; color: rgba(255,255,255,.8); }
+    .location-bar a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .location-bar a:hover { text-decoration: underline; }
+    .location-map iframe {
+      display: block;
+      width: 100%;
+      height: 60vh;
+      min-height: 380px;
+      border: 0;
+    }
+
     /* ---------- Asistencia virtual: bloque compacto ---------- */
     .virtual {
       background: #f1e4cf;
@@ -356,6 +375,7 @@
       .photo-panel { order: -1; height: 40vh; }
       .agenda { grid-template-columns: 1fr; min-height: 0; }
       .agenda-text { padding: 48px 20px; }
+      .location-map iframe { height: 50vh; min-height: 320px; }
       .virtual { padding: 44px 0; }
       .virtual .container { flex-direction: column; align-items: flex-start; gap: 24px; }
       .countdown-unit { min-width: 0; }
@@ -378,6 +398,7 @@
       <nav>
         <a href="#about">About</a>
         <a href="#agenda">Agenda</a>
+        <a href="#ubicacion">Ubicación</a>
         <a href="#registro">Registro</a>
       </nav>
     </div>
@@ -455,6 +476,28 @@
           <li><time>20:30</time><div><strong>Panel de conversación</strong><span>Preguntas del público.</span></div></li>
           <li><time>21:15</time><div><strong>Cóctel y networking</strong><span>Hasta el cierre, 22:00 hrs.</span></div></li>
         </ol>
+      </div>
+    </section>
+
+    <!-- ===== Ubicación ===== -->
+    <section id="ubicacion">
+      <div class="location-bar">
+        <div class="container">
+          <h2>Ubicación</h2>
+          <p>
+            Nombre del Lugar · Av. Ejemplo 1234, Ciudad ·
+            <a href="https://www.google.com/maps/search/?api=1&query=Santiago%2C+Chile" target="_blank" rel="noopener">Cómo llegar</a>
+          </p>
+        </div>
+      </div>
+      <!-- Cambia "q=" (aquí y en "Cómo llegar") por la dirección exacta del lugar -->
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps?q=Santiago%2C+Chile&z=16&output=embed"
+          title="Mapa de la ubicación del evento"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
       </div>
     </section>
 
