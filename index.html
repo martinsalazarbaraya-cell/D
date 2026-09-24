@@ -228,11 +228,26 @@
     .form-status.ok { display: block; background: #e7f5ec; color: #1e6b3a; }
     .form-status.error { display: block; background: #fdecea; color: #a12a1f; }
 
+    /* Banner inferior: mismo azul, más bajo que el superior */
     footer {
-      text-align: center;
-      padding: 32px 0 48px;
-      color: var(--muted);
+      background: var(--brand);
+      color: rgba(255,255,255,.75);
       font-size: .9rem;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 56px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    footer img { height: 28px; width: auto; }
+    footer a { color: #fff; }
+    @media (max-width: 560px) {
+      footer .container { flex-direction: column; text-align: center; gap: 8px; padding-top: 16px; padding-bottom: 16px; }
     }
 
     /* ---------- Agenda: mitad foto, mitad horario ---------- */
@@ -271,10 +286,11 @@
     .location-bar {
       background: var(--brand);
       color: #fff;
-      padding: 36px 0;
+      padding: 20px 0;
       text-align: center;
     }
-    .location-bar h2 { color: #fff; margin: 0 0 6px; }
+    .location-bar h2 { color: #fff; font-size: 1.6rem; margin: 0 0 2px; }
+    .location-bar p { font-size: .95rem; }
     .location-bar p { margin: 0; color: rgba(255,255,255,.8); }
     .location-bar a { color: var(--accent); font-weight: 600; text-decoration: none; }
     .location-bar a:hover { text-decoration: underline; }
@@ -606,7 +622,10 @@
   </main>
 
   <footer>
-    <div class="container">© 2026 Tu Empresa · ¿Dudas? Escríbenos a <a href="mailto:eventos@tuempresa.com">eventos@tuempresa.com</a></div>
+    <div class="container">
+      <img src="assets/logo.svg" alt="Logo de la empresa" />
+      <span>© 2026 Tu Empresa · ¿Dudas? Escríbenos a <a href="mailto:eventos@tuempresa.com">eventos@tuempresa.com</a></span>
+    </div>
   </footer>
 
   <script>
