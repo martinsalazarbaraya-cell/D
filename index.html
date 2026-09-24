@@ -183,6 +183,13 @@
       border-radius: var(--radius);
       overflow: hidden;
     }
+    .form-fallback {
+      text-align: center;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .form-fallback a { color: var(--brand); font-weight: 600; }
     .form-embed iframe {
       display: block;
       width: 100%;
@@ -292,6 +299,10 @@
             loading="lazy"
             allowfullscreen></iframe>
         </div>
+        <p class="form-fallback">
+          ¿No ves el formulario?
+          <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=xIXYI1ZFekSPfhbzw_InFKZ3ZCAg11JFomfN87BMyJZUMDU1VVdMTkhaQzNQODVGMzdXSDdJUFFVSy4u" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>
+        </p>
       </div>
     </section>
   </main>
