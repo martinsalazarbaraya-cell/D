@@ -369,12 +369,12 @@
     }
     .countdown .eyebrow { margin-bottom: 28px; }
     .countdown-units {
-      --cd-gap: clamp(40px, 8vw, 120px);
+      --cd-gap: clamp(24px, 6vw, 96px);
       display: flex;
       justify-content: center;
       gap: var(--cd-gap);
     }
-    .countdown-unit { min-width: 120px; position: relative; }
+    .countdown-unit { min-width: 140px; position: relative; }
     /* Separador: línea de 1px que se desvanece en los extremos (fina → marcada → fina) */
     .countdown-unit + .countdown-unit::before {
       content: "";
@@ -397,7 +397,7 @@
       font-family: var(--font);
       font-weight: 700;
       letter-spacing: -0.02em;
-      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      font-size: clamp(2.2rem, 8vw, 6rem);
       line-height: 1;
       font-variant-numeric: tabular-nums;
     }
@@ -428,6 +428,7 @@
       .virtual { padding: 44px 0; }
       .virtual .container { flex-direction: column; align-items: flex-start; gap: 24px; }
       .countdown-unit { min-width: 0; }
+      .countdown-unit .label { font-size: .7rem; letter-spacing: .08em; }
       .menu-toggle { display: block; }
       /* El menú se despliega bajo el banner */
       .banner nav {
@@ -620,9 +621,10 @@
       <div class="container">
         <p class="eyebrow">Faltan</p>
         <div class="countdown-units" id="countdown">
-          <div class="countdown-unit"><span class="num" id="cd-months">–</span><span class="label" id="cd-months-label">Meses</span></div>
           <div class="countdown-unit"><span class="num" id="cd-days">–</span><span class="label" id="cd-days-label">Días</span></div>
           <div class="countdown-unit"><span class="num" id="cd-hours">–</span><span class="label" id="cd-hours-label">Horas</span></div>
+          <div class="countdown-unit"><span class="num" id="cd-minutes">–</span><span class="label" id="cd-minutes-label">Minutos</span></div>
+          <div class="countdown-unit"><span class="num" id="cd-seconds">–</span><span class="label" id="cd-seconds-label">Segundos</span></div>
         </div>
       </div>
     </section>
@@ -668,29 +670,23 @@
         return;
       }
 
-      // Meses completos de calendario, luego los días y horas restantes
-      let months = (EVENT_DATE.getFullYear() - now.getFullYear()) * 12
-                 + (EVENT_DATE.getMonth() - now.getMonth());
-      const afterMonths = (m) => {
-        const d = new Date(now);
-        d.setMonth(d.getMonth() + m);
-        return d;
-      };
-      if (afterMonths(months) > EVENT_DATE) months--;
-
-      const rest = EVENT_DATE - afterMonths(months);
-      const days = Math.floor(rest / 86400000);
-      const hours = Math.floor((rest % 86400000) / 3600000);
+      // Tiempo restante en segundos, repartido en días, horas, minutos y segundos
+      const total = Math.floor((EVENT_DATE - now) / 1000);
+      const days = Math.floor(total / 86400);
+      const hours = Math.floor((total % 86400) / 3600);
+      const minutes = Math.floor((total % 3600) / 60);
+      const seconds = total % 60;
 
       const set = (id, value, one, many) => {
-        document.getElementById(id).textContent = value;
+        document.getElementById(id).textContent = String(value).padStart(2, "0");
         document.getElementById(id + "-label").textContent = value === 1 ? one : many;
       };
-      set("cd-months", months, "Mes", "Meses");
       set("cd-days", days, "Día", "Días");
       set("cd-hours", hours, "Hora", "Horas");
+      set("cd-minutes", minutes, "Minuto", "Minutos");
+      set("cd-seconds", seconds, "Segundo", "Segundos");
     }
-    const countdownTimer = setInterval(updateCountdown, 30000);
+    const countdownTimer = setInterval(updateCountdown, 1000);
     updateCountdown();
 
   </script>
