@@ -47,6 +47,8 @@
 
     /* ---------- Banner ---------- */
     .banner {
+      position: relative;
+      z-index: 10;
       background: var(--brand);
       color: #fff;
     }
@@ -67,6 +69,33 @@
       margin-left: 20px;
     }
     .banner nav a:hover { color: #fff; }
+
+    /* Botón hamburguesa: oculto en computador, visible en celular */
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    .menu-toggle:focus-visible { outline: 2px solid var(--accent); }
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      margin: 5px auto;
+      background: currentColor;
+      border-radius: 2px;
+      transition: transform .25s, opacity .2s;
+    }
+    /* Al abrir, las 3 rayas se convierten en una X */
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ---------- Hero ---------- */
     /* Pantalla completa: texto 2/3, foto 1/3 */
@@ -395,7 +424,27 @@
       .virtual { padding: 44px 0; }
       .virtual .container { flex-direction: column; align-items: flex-start; gap: 24px; }
       .countdown-unit { min-width: 0; }
-      .banner nav { display: none; }
+      .menu-toggle { display: block; }
+      /* El menú se despliega bajo el banner */
+      .banner nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--brand);
+        border-top: 1px solid rgba(255,255,255,.12);
+        box-shadow: 0 12px 24px -12px rgba(0,0,0,.4);
+        padding: 8px 0;
+      }
+      .banner nav.open { display: block; }
+      .banner nav a {
+        display: block;
+        margin: 0;
+        padding: 14px 20px;
+        font-size: 1.05rem;
+      }
+      .banner nav a + a { border-top: 1px solid rgba(255,255,255,.08); }
     }
     @media (max-width: 560px) {
       .container { padding: 0 16px; }
@@ -413,7 +462,11 @@
       <a href="https://www.tuempresa.com" class="logo-link" target="_blank" rel="noopener" aria-label="Ir a la web de la empresa">
         <img src="assets/logo.svg" alt="Logo de la empresa" />
       </a>
-      <nav>
+      <button class="menu-toggle" type="button" aria-label="Abrir menú"
+              aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="main-nav">
         <a href="#about">About</a>
         <a href="#agenda">Agenda</a>
         <a href="#ubicacion">Ubicación</a>
@@ -581,6 +634,23 @@
   </footer>
 
   <script>
+    // ---------- Menú hamburguesa (celular) ----------
+    const menuBtn = document.querySelector(".menu-toggle");
+    const nav = document.getElementById("main-nav");
+
+    function setMenu(open) {
+      nav.classList.toggle("open", open);
+      menuBtn.setAttribute("aria-expanded", open);
+      menuBtn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    }
+    menuBtn.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
+    // Se cierra al elegir una sección, al tocar fuera o con Escape
+    nav.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".banner")) setMenu(false);
+    });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+
     // ---------- Contador ----------
     // Fecha y hora de inicio del evento. El final (-03:00) es la zona horaria del evento.
     const EVENT_DATE = new Date("2026-10-15T19:00:00-03:00");
