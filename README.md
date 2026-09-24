@@ -1,6 +1,6 @@
 # Invitación al evento
 
-Página de invitación en HTML (`index.html`) con banner y logo, título, ubicación, fecha, foto del lugar, botón RSVP, sección About y formulario de registro que guarda cada respuesta en una planilla.
+Página de invitación en HTML (`index.html`) con banner y logo, título, ubicación, fecha, foto del lugar, botón RSVP, sección About y formulario de registro de Microsoft Forms incrustado.
 
 ## Personalizar
 
@@ -9,21 +9,12 @@ Página de invitación en HTML (`index.html`) con banner y logo, título, ubicac
 - **Textos:** título, lugar, dirección, fecha, hora y About están directo en `index.html`.
 - **Colores:** variables `--brand` y `--accent` al inicio del `<style>`.
 
-## Conectar el registro a una planilla (Excel)
+## Registro (Microsoft Forms)
 
-Un HTML estático no puede escribir un `.xlsx` directamente, así que el formulario envía los datos a un Google Sheet mediante Apps Script. Desde ahí descargas la lista como Excel cuando quieras (Archivo → Descargar → Microsoft Excel).
+El formulario de la sección **Registro** es un Microsoft Form incrustado con un `<iframe>`. Las respuestas se ven en Forms → **Respuestas → Abrir en Excel** (o en el Excel enlazado de OneDrive, si el Form se creó desde Excel Online).
 
-1. Crea un Google Sheet nuevo.
-2. Ve a **Extensiones → Apps Script**, borra lo que hay y pega el contenido de `apps-script/Code.gs`. Guarda.
-3. **Implementar → Nueva implementación** → tipo **Aplicación web**.
-   - Ejecutar como: **Yo**
-   - Quién tiene acceso: **Cualquier persona**
-4. Autoriza los permisos y copia la URL que termina en `/exec`.
-5. En `index.html`, pega esa URL en `const SCRIPT_URL = "..."`.
-
-Cada registro crea una fila en la hoja **Asistentes** con: fecha de registro, nombre, apellido, email, teléfono, empresa, cargo, asistencia, acompañante, restricciones alimentarias y comentarios.
-
-> Si cambias el código del Apps Script después, tienes que hacer **Implementar → Administrar implementaciones → Editar → Nueva versión** para que tome los cambios.
+- Para cambiar de formulario: en Forms, **Compartir → Insertar**, y reemplaza el `src` del `<iframe>` en `index.html`.
+- Para que respondan invitados externos, el Form debe estar configurado como **"Cualquiera puede responder"**.
 
 ## Publicar
 
