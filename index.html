@@ -261,24 +261,18 @@
     /* Banner inferior: mismo azul, más bajo que el superior */
     footer {
       background: var(--brand);
-      color: rgba(255,255,255,.75);
-      font-size: .9rem;
       border-top: 1px solid rgba(255,255,255,.12);
     }
+    /* Solo el logo, centrado */
     footer .container {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      justify-content: center;
       min-height: 56px;
       padding-top: 10px;
       padding-bottom: 10px;
     }
     footer img { height: 28px; width: auto; }
-    footer a { color: #fff; }
-    @media (max-width: 560px) {
-      footer .container { flex-direction: column; text-align: center; gap: 8px; padding-top: 16px; padding-bottom: 16px; }
-    }
 
     /* ---------- Agenda: mitad foto, mitad horario ---------- */
     .agenda {
@@ -635,7 +629,6 @@
       <a href="https://www.tuempresa.com" class="logo-link" target="_blank" rel="noopener" aria-label="Ir a la web de la empresa">
         <img src="assets/logo.svg" alt="Logo de la empresa" />
       </a>
-      <span>© 2026 Tu Empresa · ¿Dudas? Escríbenos a <a href="mailto:eventos@tuempresa.com">eventos@tuempresa.com</a></span>
     </div>
   </footer>
 
