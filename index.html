@@ -118,6 +118,7 @@
       transition: background .2s, transform .2s;
     }
     .btn:hover { background: var(--brand-dark); transform: translateY(-1px); }
+    .btn:disabled { opacity: .6; cursor: wait; transform: none; }
 
     .venue-photo {
       position: relative;
@@ -172,31 +173,48 @@
     .about p:last-child { margin-bottom: 0; }
     .about + section.block { border-top: 0; }
 
-    /* ---------- Formulario (Microsoft Forms) ---------- */
-    #registro h2 { text-align: center; }
-    .form-intro { color: var(--muted); margin: -8px 0 24px; text-align: center; }
-    .form-embed {
-      max-width: 720px;
-      margin: 0 auto;
+    /* ---------- Formulario ---------- */
+    .form-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      overflow: hidden;
+      padding: 32px;
+      max-width: 720px;
+      margin: 0 auto;
     }
-    .form-fallback {
-      text-align: center;
-      margin: 16px 0 0;
-      color: var(--muted);
-      font-size: .95rem;
-    }
-    .form-fallback a { color: var(--brand); font-weight: 600; }
-    .form-embed iframe {
-      display: block;
+    #registro h2 { text-align: center; }
+    .form-intro { color: var(--muted); margin: -8px 0 24px; text-align: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .field label, .field legend { font-weight: 500; font-size: .95rem; }
+    .field .req { color: #c0392b; }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      font: inherit;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fcfbf9;
+      color: var(--text);
       width: 100%;
-      height: 85vh;
-      min-height: 600px;
-      border: 0;
     }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--brand);
+      outline-offset: 1px;
+      background: #fff;
+    }
+    textarea { min-height: 96px; resize: vertical; }
+    fieldset { border: 0; padding: 0; margin: 0 0 18px; }
+    .radios { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 6px; }
+    .radios label { display: flex; gap: 8px; align-items: center; font-weight: 400; cursor: pointer; }
+
+    .form-status {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: none;
+    }
+    .form-status.ok { display: block; background: #e7f5ec; color: #1e6b3a; }
+    .form-status.error { display: block; background: #fdecea; color: #a12a1f; }
 
     footer {
       text-align: center;
@@ -214,6 +232,8 @@
     }
     @media (max-width: 560px) {
       .container { padding: 0 16px; }
+      .grid-2 { grid-template-columns: 1fr; gap: 0; }
+      .form-card { padding: 22px; }
     }
   </style>
 </head>
@@ -291,18 +311,69 @@
         <h2>Registro</h2>
         <p class="form-intro">Confirma tu asistencia completando el formulario.</p>
 
-        <!-- Formulario de Microsoft Forms: las respuestas llegan a Forms / Excel -->
-        <div class="form-embed">
-          <iframe
-            src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=xIXYI1ZFekSPfhbzw_InFKZ3ZCAg11JFomfN87BMyJZUMDU1VVdMTkhaQzNQODVGMzdXSDdJUFFVSy4u&embed=true"
-            title="Formulario de registro"
-            loading="lazy"
-            allowfullscreen></iframe>
-        </div>
-        <p class="form-fallback">
-          ¿No ves el formulario?
-          <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=xIXYI1ZFekSPfhbzw_InFKZ3ZCAg11JFomfN87BMyJZUMDU1VVdMTkhaQzNQODVGMzdXSDdJUFFVSy4u" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>
-        </p>
+        <form class="form-card" id="rsvp-form" novalidate>
+          <div class="grid-2">
+            <div class="field">
+              <label for="nombre">Nombre <span class="req">*</span></label>
+              <input type="text" id="nombre" name="nombre" required autocomplete="given-name" />
+            </div>
+            <div class="field">
+              <label for="apellido">Apellido <span class="req">*</span></label>
+              <input type="text" id="apellido" name="apellido" required autocomplete="family-name" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" name="empresa" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="cargo">Cargo</label>
+              <input type="text" id="cargo" name="cargo" autocomplete="organization-title" />
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend>¿Asistirás? <span class="req">*</span></legend>
+            <div class="radios">
+              <label><input type="radio" name="asistira" value="Sí" required checked /> Sí, ahí estaré</label>
+              <label><input type="radio" name="asistira" value="No" /> No podré ir</label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="acompanantes">¿Vienes con acompañante?</label>
+            <select id="acompanantes" name="acompanantes">
+              <option value="0">No</option>
+              <option value="1">Sí, 1 persona</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="restricciones">Restricciones alimentarias</label>
+            <input type="text" id="restricciones" name="restricciones" placeholder="Vegetariano, celíaco, alergias…" />
+          </div>
+
+          <div class="field">
+            <label for="comentarios">Comentarios o preguntas</label>
+            <textarea id="comentarios" name="comentarios"></textarea>
+          </div>
+
+          <button type="submit" class="btn" id="submit-btn">Confirmar asistencia</button>
+          <div class="form-status" id="form-status" role="status"></div>
+        </form>
       </div>
     </section>
   </main>
@@ -311,5 +382,51 @@
     <div class="container">© 2026 Tu Empresa · ¿Dudas? Escríbenos a <a href="mailto:eventos@tuempresa.com">eventos@tuempresa.com</a></div>
   </footer>
 
+  <script>
+    // URL del Web App de Google Apps Script (ver README.md).
+    // Cada registro se agrega como una fila en tu Google Sheet, descargable como Excel.
+    const SCRIPT_URL = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
+
+    const form = document.getElementById("rsvp-form");
+    const statusEl = document.getElementById("form-status");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function showStatus(msg, type) {
+      statusEl.textContent = msg;
+      statusEl.className = "form-status " + type;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (!SCRIPT_URL.startsWith("https://")) {
+        showStatus("Falta configurar SCRIPT_URL en index.html: el registro no se guardó.", "error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando…";
+
+      const data = new URLSearchParams(new FormData(form));
+      data.append("fecha_registro", new Date().toISOString());
+
+      try {
+        // no-cors: Apps Script no devuelve cabeceras CORS; la fila igual se guarda.
+        await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: data });
+        form.reset();
+        showStatus("¡Listo! Tu registro quedó confirmado. Nos vemos pronto.", "ok");
+      } catch (err) {
+        showStatus("No pudimos enviar tu registro. Revisa tu conexión e inténtalo de nuevo.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Confirmar asistencia";
+      }
+    });
+  </script>
 </body>
 </html>
