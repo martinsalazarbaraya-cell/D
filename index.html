@@ -6,9 +6,29 @@
   <title>Nombre del Evento · Invitación</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Inter: respaldo mientras no estén los archivos de Graphik en assets/fonts/ -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    /* Graphik (fuente con licencia): sube los archivos a assets/fonts/ */
+    @font-face {
+      font-family: "Graphik";
+      src: url("assets/fonts/Graphik-Regular.woff2") format("woff2"),
+           url("assets/fonts/Graphik-Regular.woff") format("woff");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Graphik";
+      src: url("assets/fonts/Graphik-Bold.woff2") format("woff2"),
+           url("assets/fonts/Graphik-Bold.woff") format("woff");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
+      --font: "Graphik", "Inter", system-ui, sans-serif;
       --brand: #345f5d;
       --brand-dark: #152a45;
       --accent: #e0a458;
@@ -30,7 +50,8 @@
 
     body {
       margin: 0;
-      font-family: "Inter", system-ui, sans-serif;
+      font-family: var(--font);
+      font-weight: 400;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -113,13 +134,14 @@
       text-transform: uppercase;
       letter-spacing: .12em;
       font-size: .8rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent);
       margin: 0 0 12px;
     }
     h1 {
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 600;
+      font-family: var(--font);
+      font-weight: 700;
+      letter-spacing: -0.02em;
       font-size: clamp(2.2rem, 5vw, 4.2rem);
       line-height: 1.1;
       margin: 0 0 28px;
@@ -138,7 +160,7 @@
       align-items: flex-start;
     }
     .details svg { flex: 0 0 22px; margin-top: 3px; color: var(--brand); }
-    .details strong { display: block; font-weight: 600; }
+    .details strong { display: block; font-weight: 700; }
     .details span { color: var(--muted); font-size: .95rem; }
 
     .btn {
@@ -149,7 +171,7 @@
       padding: 14px 32px;
       border-radius: 999px;
       font: inherit;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       cursor: pointer;
       transition: background .2s, transform .2s;
@@ -177,7 +199,7 @@
       display: grid;
       place-items: center;
       color: var(--brand);
-      font-weight: 500;
+      font-weight: 400;
       text-align: center;
       padding: 20px;
     }
@@ -198,8 +220,9 @@
       section.about p { max-width: 820px; font-size: 1.3rem; }
     }
     h2 {
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 600;
+      font-family: var(--font);
+      font-weight: 700;
+      letter-spacing: -0.02em;
       font-size: 2rem;
       margin: 0 0 20px;
       color: var(--brand-dark);
@@ -255,7 +278,7 @@
       color: var(--muted);
       font-size: .95rem;
     }
-    .form-fallback a { color: var(--brand); font-weight: 600; }
+    .form-fallback a { color: var(--brand); font-weight: 700; }
 
     /* Banner inferior: mismo azul, más bajo que el superior */
     footer {
@@ -304,11 +327,11 @@
     }
     .agenda-list li:last-child { border-bottom: 0; }
     .agenda-list time {
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent);
       font-variant-numeric: tabular-nums;
     }
-    .agenda-list strong { display: block; font-weight: 600; }
+    .agenda-list strong { display: block; font-weight: 700; }
     .agenda-list span { color: var(--muted); font-size: .95rem; }
 
     /* ---------- Ubicación: franja azul + mapa ---------- */
@@ -321,7 +344,7 @@
     .location-bar h2 { color: #fff; font-size: 1.6rem; margin: 0 0 2px; }
     .location-bar p { font-size: .95rem; }
     .location-bar p { margin: 0; color: rgba(255,255,255,.8); }
-    .location-bar a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .location-bar a { color: var(--accent); font-weight: 700; text-decoration: none; }
     .location-bar a:hover { text-decoration: underline; }
     .location-map iframe {
       display: block;
@@ -352,7 +375,7 @@
       font-size: .95rem;
       color: var(--brand-dark);
     }
-    .virtual-meta strong { font-weight: 600; }
+    .virtual-meta strong { font-weight: 700; }
     .virtual .btn { flex: 0 0 auto; }
 
     /* ---------- Contador: media pantalla ---------- */
@@ -393,8 +416,9 @@
     }
     .countdown-unit .num {
       display: block;
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 600;
+      font-family: var(--font);
+      font-weight: 700;
+      letter-spacing: -0.02em;
       font-size: clamp(3.2rem, 9vw, 6.5rem);
       line-height: 1;
       font-variant-numeric: tabular-nums;
@@ -408,7 +432,9 @@
       color: rgba(255,255,255,.75);
     }
     .countdown-done {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: var(--font);
+      font-weight: 700;
+      letter-spacing: -0.02em;
       font-size: clamp(2rem, 5vw, 3rem);
       margin: 0;
     }
