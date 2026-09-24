@@ -52,6 +52,8 @@
       gap: 16px;
     }
     .banner img { height: 40px; width: auto; }
+    .logo-link { display: inline-flex; transition: opacity .2s; }
+    .logo-link:hover { opacity: .8; }
     .banner nav a {
       color: rgba(255,255,255,.85);
       text-decoration: none;
@@ -410,7 +412,10 @@
   <header class="banner">
     <div class="container">
       <!-- Reemplaza assets/logo.svg por el logo de tu empresa -->
-      <img src="assets/logo.svg" alt="Logo de la empresa" />
+      <!-- Cambia el href por la web de tu empresa (también en el logo del banner de abajo) -->
+      <a href="https://www.tuempresa.com" class="logo-link" target="_blank" rel="noopener" aria-label="Ir a la web de la empresa">
+        <img src="assets/logo.svg" alt="Logo de la empresa" />
+      </a>
       <nav>
         <a href="#about">About</a>
         <a href="#agenda">Agenda</a>
@@ -623,7 +628,9 @@
 
   <footer>
     <div class="container">
-      <img src="assets/logo.svg" alt="Logo de la empresa" />
+      <a href="https://www.tuempresa.com" class="logo-link" target="_blank" rel="noopener" aria-label="Ir a la web de la empresa">
+        <img src="assets/logo.svg" alt="Logo de la empresa" />
+      </a>
       <span>© 2026 Tu Empresa · ¿Dudas? Escríbenos a <a href="mailto:eventos@tuempresa.com">eventos@tuempresa.com</a></span>
     </div>
   </footer>
