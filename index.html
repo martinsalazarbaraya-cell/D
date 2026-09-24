@@ -93,7 +93,7 @@
     .details {
       list-style: none;
       padding: 0;
-      margin: 0 0 32px;
+      margin: 0;
       display: grid;
       gap: 14px;
     }
@@ -120,6 +120,15 @@
       transition: background .2s, transform .2s;
     }
     .btn:hover { background: var(--brand-dark); transform: translateY(-1px); }
+
+    /* Botón que flota encima de una foto */
+    .btn-overlay {
+      position: absolute;
+      left: 32px;
+      bottom: 32px;
+      z-index: 2;
+      box-shadow: 0 10px 24px -8px rgba(0,0,0,.45);
+    }
     .btn:disabled { opacity: .6; cursor: wait; transform: none; }
 
     .photo-panel {
@@ -448,8 +457,6 @@
               </div>
             </li>
           </ul>
-
-          <a href="#registro" class="btn">RSVP</a>
         </div>
 
         <!-- Reemplaza assets/lugar.jpg por una foto del lugar -->
@@ -457,6 +464,8 @@
           <div class="placeholder"><div>Foto del lugar<br><small>(assets/lugar.jpg)</small></div></div>
           <img src="assets/lugar.jpg" alt="Foto del lugar del evento"
                onerror="this.remove()" style="position:relative" />
+          <!-- Botón RSVP flotando sobre la foto, esquina inferior izquierda -->
+          <a href="#registro" class="btn btn-overlay">RSVP</a>
         </div>
     </section>
 
