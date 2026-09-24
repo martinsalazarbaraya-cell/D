@@ -147,21 +147,30 @@
       margin: 0 0 20px;
       color: var(--brand-dark);
     }
-    .about p { max-width: 720px; color: #333; font-size: 1.05rem; }
-    .highlights {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 28px;
+    /* About: bloque azul con texto blanco */
+    section.block.about {
+      background: var(--brand);
+      color: #fff;
+      padding: 88px 0;
     }
-    .highlight {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
+    .about h2 { color: #fff; }
+    .about h2::after {
+      content: "";
+      display: block;
+      width: 56px;
+      height: 3px;
+      margin-top: 14px;
+      background: var(--accent);
     }
-    .highlight strong { display: block; margin-bottom: 4px; color: var(--brand); }
-    .highlight span { color: var(--muted); font-size: .95rem; }
+    .about p {
+      max-width: 720px;
+      margin: 0 0 18px;
+      color: rgba(255,255,255,.9);
+      font-size: 1.1rem;
+      line-height: 1.75;
+    }
+    .about p:last-child { margin-bottom: 0; }
+    .about + section.block { border-top: 0; }
 
     /* ---------- Formulario ---------- */
     .form-card {
@@ -216,7 +225,6 @@
       .hero { grid-template-columns: 1fr; min-height: 0; }
       .hero-text { padding: 40px 20px; }
       .venue-photo { order: -1; height: 40vh; }
-      .highlights { grid-template-columns: 1fr; }
       .banner nav { display: none; }
     }
     @media (max-width: 560px) {
@@ -280,20 +288,17 @@
       <div class="container">
         <h2>About</h2>
         <p>
-          Aquí va la descripción del evento: de qué se trata, por qué vale la pena venir
-          y qué se van a llevar los asistentes. Dos o tres párrafos cortos funcionan mejor
-          que uno largo.
+          Primer párrafo: de qué se trata el evento y por qué lo estamos organizando.
+          Una o dos frases que enganchen.
         </p>
         <p>
-          Puedes mencionar a los speakers, la agenda general o cualquier detalle
-          importante (dress code, estacionamiento, etc.).
+          Segundo párrafo: qué va a pasar ese día. Speakers, charlas, panel,
+          networking o lo que tenga la agenda.
         </p>
-
-        <div class="highlights">
-          <div class="highlight"><strong>Networking</strong><span>Conecta con líderes de la industria.</span></div>
-          <div class="highlight"><strong>Charlas</strong><span>Speakers invitados y panel de conversación.</span></div>
-          <div class="highlight"><strong>Cóctel</strong><span>Cierre con cóctel y música en vivo.</span></div>
-        </div>
+        <p>
+          Tercer párrafo: detalles prácticos o cierre. Dress code, estacionamiento,
+          cóctel al final, o una invitación a registrarse.
+        </p>
       </div>
     </section>
 
