@@ -104,8 +104,16 @@
       min-height: calc(100vh - 72px);
       min-height: calc(100svh - 72px);
     }
+    /* Portada: imagen de fondo y texto en blanco */
     .hero-text {
-      align-self: center;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* Imagen algo más grande y anclada abajo-izquierda: la diagonal queda
+         arriba a la derecha y no cruza el título */
+      background: var(--brand) url("assets/fondo-portada.jpg") left bottom / auto 125% no-repeat;
+      color: #fff;
       padding: 64px 48px 64px max(20px, calc((100vw - 1080px) / 2 + 20px));
     }
     .eyebrow {
@@ -140,6 +148,9 @@
     .details svg { flex: 0 0 22px; margin-top: 3px; color: var(--brand); }
     .details strong { display: block; font-weight: 700; }
     .details span { color: var(--muted); font-size: .95rem; }
+    .hero-text h1 { color: #fff; }
+    .hero-text .details svg { color: #fff; }
+    .hero-text .details span { color: rgba(255,255,255,.8); }
 
     .btn {
       display: inline-block;
@@ -414,7 +425,7 @@
     /* ---------- Responsive ---------- */
     @media (max-width: 820px) {
       .hero { grid-template-columns: 1fr; min-height: 0; }
-      .hero-text { padding: 40px 20px; }
+      .hero-text { padding: 40px 20px; background-size: auto 140%; }
       .photo-panel { order: -1; height: 40vh; }
       .agenda { grid-template-columns: 1fr; min-height: 0; }
       .agenda-text { padding: 48px 20px; }
