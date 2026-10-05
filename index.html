@@ -331,30 +331,6 @@
       border: 0;
     }
 
-    /* ---------- Asistencia virtual: bloque compacto ---------- */
-    .virtual {
-      background: #ffffff;
-      padding: 56px 0;
-    }
-    .virtual .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-    }
-    .virtual h2 { font-size: 1.7rem; margin: 0 0 8px; }
-    .virtual p { margin: 0; color: #4a4f57; max-width: 620px; }
-    .virtual-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 24px;
-      margin-top: 14px;
-      font-size: .95rem;
-      color: var(--brand-dark);
-    }
-    .virtual-meta strong { font-weight: 700; }
-    .virtual .btn { flex: 0 0 auto; }
-
     /* ---------- Contador: media pantalla ---------- */
     .countdown {
       background: var(--brand);
@@ -425,8 +401,6 @@
       .agenda-text { padding: 48px 20px; }
       .agenda-list li { grid-template-columns: 1fr; gap: 2px; }
       .location-map iframe { height: 50vh; min-height: 320px; }
-      .virtual { padding: 44px 0; }
-      .virtual .container { flex-direction: column; align-items: flex-start; gap: 24px; }
       .countdown-unit { min-width: 0; }
       .countdown-unit .label { font-size: .7rem; letter-spacing: .08em; }
       .menu-toggle { display: block; }
@@ -578,24 +552,6 @@
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen></iframe>
-      </div>
-    </section>
-
-    <!-- ===== Asistencia virtual ===== -->
-    <section class="virtual" id="virtual">
-      <div class="container">
-        <div>
-          <h2>¿No puedes ir? Síguelo online</h2>
-          <p>
-            Transmitiremos el evento en vivo. Inscríbete marcando "Virtual" en el formulario
-            y te enviaremos el link de acceso a tu correo.
-          </p>
-          <div class="virtual-meta">
-            <span><strong>Plataforma:</strong> Zoom</span>
-            <span><strong>Transmisión:</strong> 19:30 – 21:15 hrs</span>
-          </div>
-        </div>
-        <a href="#registro" class="btn">Inscribirme online</a>
       </div>
     </section>
 
