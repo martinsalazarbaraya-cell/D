@@ -209,7 +209,10 @@
     }
     /* About: bloque azul con texto blanco */
     section.block.about {
-      background: var(--brand);
+      background-color: var(--brand);
+      /* Patrón de hexágonos (eco del techo del Orquideorama). Opacidad en stroke-opacity */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.12' stroke-width='1.5'%3E%3Cpath d='M28 0 L56 16 L56 48 L28 64 L0 48 L0 16 Z'/%3E%3Cpath d='M28 64 L28 97'/%3E%3C/g%3E%3C/svg%3E");
+      background-position: center;
       color: #fff;
       padding: 88px 0;
     }
@@ -311,7 +314,10 @@
 
     /* ---------- Ubicación: franja azul + mapa ---------- */
     .location-bar {
-      background: var(--brand);
+      background-color: var(--brand);
+      /* Patrón de puntos: tamaño del punto (1.5px) y separación (22px) */
+      background-image: radial-gradient(rgba(255,255,255,.18) 1.5px, transparent 1.6px);
+      background-size: 22px 22px;
       color: #fff;
       padding: 20px 0;
       text-align: center;
