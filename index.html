@@ -319,8 +319,10 @@
     .location-bar h2 { color: #fff; font-size: 1.6rem; margin: 0 0 2px; }
     .location-bar p { font-size: .95rem; }
     .location-bar p { margin: 0; color: rgba(255,255,255,.8); }
-    .location-bar a { color: var(--accent); font-weight: 700; text-decoration: none; }
+    .location-bar a { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; }
     .location-bar a:hover { text-decoration: underline; }
+    .location-bar .location-name { color: #fff; font-weight: 700; font-size: 1.05rem; margin-top: 4px; }
+    .location-bar .location-address { margin-top: 2px; }
     .location-map iframe {
       display: block;
       width: 100%;
@@ -561,16 +563,17 @@
       <div class="location-bar">
         <div class="container">
           <h2>Ubicación</h2>
-          <p>
-            Nombre del Lugar · Av. Ejemplo 1234, Ciudad ·
-            <a href="https://www.google.com/maps/search/?api=1&query=Santiago%2C+Chile" target="_blank" rel="noopener">Cómo llegar</a>
+          <p class="location-name">Jardín Botánico, Orquideorama</p>
+          <p class="location-address">
+            Calle 73 # 51D - 14, Medellín, Antioquia ·
+            <a href="https://www.google.com/maps/search/?api=1&query=Orquideorama%2C+Jard%C3%ADn+Bot%C3%A1nico+de+Medell%C3%ADn%2C+Calle+73+%2351D-14%2C+Medell%C3%ADn%2C+Antioquia" target="_blank" rel="noopener">Cómo llegar</a>
           </p>
         </div>
       </div>
-      <!-- Cambia "q=" (aquí y en "Cómo llegar") por la dirección exacta del lugar -->
+      <!-- El mapa y "Cómo llegar" buscan la dirección del parámetro query= / q= -->
       <div class="location-map">
         <iframe
-          src="https://www.google.com/maps?q=Santiago%2C+Chile&z=16&output=embed"
+          src="https://www.google.com/maps?q=Orquideorama%2C+Jard%C3%ADn+Bot%C3%A1nico+de+Medell%C3%ADn%2C+Calle+73+%2351D-14%2C+Medell%C3%ADn%2C+Antioquia&z=16&output=embed"
           title="Mapa de la ubicación del evento"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
