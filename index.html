@@ -171,6 +171,8 @@
       background: linear-gradient(135deg, #c9d6e3, #e8dccb);
     }
     .photo-panel img { width: 100%; height: 100%; object-fit: cover; }
+    /* Encuadre de la foto de portada (0% = borde izquierdo, 50% = centro) */
+    .hero .photo-panel img { object-position: 15% center; }
     .photo-panel .placeholder {
       position: absolute;
       inset: 0;
@@ -292,9 +294,9 @@
     }
     .agenda-list li {
       display: grid;
-      grid-template-columns: 88px 1fr;
+      grid-template-columns: 150px 1fr;
       gap: 20px;
-      padding: 18px 0;
+      padding: 14px 0;
       border-bottom: 1px solid var(--border);
     }
     .agenda-list li:last-child { border-bottom: 0; }
@@ -302,6 +304,7 @@
       font-weight: 700;
       color: var(--accent);
       font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
     .agenda-list strong { display: block; font-weight: 700; }
     .agenda-list span { color: var(--muted); font-size: .95rem; }
@@ -418,6 +421,7 @@
       .photo-panel { order: -1; height: 40vh; }
       .agenda { grid-template-columns: 1fr; min-height: 0; }
       .agenda-text { padding: 48px 20px; }
+      .agenda-list li { grid-template-columns: 1fr; gap: 2px; }
       .location-map iframe { height: 50vh; min-height: 320px; }
       .virtual { padding: 44px 0; }
       .virtual .container { flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -502,7 +506,7 @@
         <!-- Reemplaza assets/lugar.jpg por una foto del lugar -->
         <div class="photo-panel">
           <div class="placeholder"><div>Foto del lugar<br><small>(assets/lugar.jpg)</small></div></div>
-          <img src="Nadia Todres-74.jpg" alt="Foto del lugar del evento"
+          <img src="assets/lugar.jpg" alt="Foto del lugar del evento"
                onerror="this.remove()" style="position:relative" />
           <!-- Botón RSVP flotando sobre la foto, esquina superior izquierda -->
           <a href="#registro" class="btn btn-overlay">RSVP</a>
@@ -541,11 +545,13 @@
       <div class="agenda-text">
         <h2>Agenda</h2>
         <ol class="agenda-list">
-          <li><time>19:00</time><div><strong>Recepción y acreditación</strong><span>Bienvenida con un café.</span></div></li>
-          <li><time>19:30</time><div><strong>Palabras de bienvenida</strong><span>Apertura del evento.</span></div></li>
-          <li><time>19:45</time><div><strong>Charla principal</strong><span>Speaker invitado.</span></div></li>
-          <li><time>20:30</time><div><strong>Panel de conversación</strong><span>Preguntas del público.</span></div></li>
-          <li><time>21:15</time><div><strong>Cóctel y networking</strong><span>Hasta el cierre, 22:00 hrs.</span></div></li>
+          <li><time>8:30 – 9:00 a.m.</time><div><strong>Palabras de apertura</strong><span>Elizabeth Yee, Vicepresidente Ejecutiva de Programas de la Fundación Rockefeller</span></div></li>
+          <li><time>9:00 – 9:10 a.m.</time><div><strong>Palabras de Lyana Latorre</strong><span>Vicepresidente para América Latina y el Caribe de la Fundación Rockefeller</span></div></li>
+          <li><time>9:10 – 9:40 a.m.</time><div><strong>Keynote</strong><span>Evidencia como punto de partida</span></div></li>
+          <li><time>9:40 – 10:00 a.m.</time><div><strong>Coffee break</strong></div></li>
+          <li><time>10:00 – 10:40 a.m.</time><div><strong>Panel de casos de éxito</strong></div></li>
+          <li><time>10:40 – 12:00 p.m.</time><div><strong>Cierre</strong><span>Compromisos y próximos pasos</span></div></li>
+          <li><time>12:00 – 2:00 p.m.</time><div><strong>Almuerzo</strong></div></li>
         </ol>
       </div>
     </section>
@@ -652,8 +658,8 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
     // ---------- Contador ----------
-    // Fecha y hora de inicio del evento. El final (-03:00) es la zona horaria del evento.
-    const EVENT_DATE = new Date("2026-10-15T19:00:00-03:00");
+    // Fecha y hora de inicio del evento. El final (-05:00) es la hora de Colombia.
+    const EVENT_DATE = new Date("2026-11-19T08:00:00-05:00");
 
     function updateCountdown() {
       const now = new Date();
