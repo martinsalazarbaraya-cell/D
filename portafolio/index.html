@@ -7,7 +7,7 @@
   <meta name="description" content="Portafolio de diseño gráfico, contenido para marcas, ilustración y fotografía." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@1&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #05070d;
@@ -19,7 +19,8 @@
       --muted: #8a93ab;
       --blue: #3d7bff;
       --blue-soft: #7aa5ff;
-      --display: "Space Grotesk", "Inter", Arial, sans-serif;
+      --display: "Bricolage Grotesque", "Inter", Arial, sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
       --sans: "Inter", Arial, Helvetica, sans-serif;
       --mono: "JetBrains Mono", ui-monospace, monospace;
       --radius: 14px;
@@ -98,7 +99,7 @@
     .hero h1 {
       font-family: var(--display); font-weight: 500;
       font-size: clamp(44px, 8.4vw, 132px);
-      line-height: .95; letter-spacing: -0.04em; margin: 24px 0 40px;
+      line-height: .95; letter-spacing: -0.035em; margin: 24px 0 40px;
     }
     .hero h1 span {
       background: linear-gradient(90deg, var(--blue-soft), var(--blue));
@@ -109,9 +110,6 @@
       border-top: 1px solid var(--line); padding-top: 28px;
     }
     .hero-bottom p { max-width: 480px; margin: 0; color: var(--muted); font-size: 17px; }
-    .hero-stats { display: flex; gap: 48px; }
-    .hero-stats b { display: block; font-family: var(--display); font-weight: 500; font-size: 32px; line-height: 1; }
-    .hero-stats span { font-size: 13px; color: var(--muted); }
     .status { display: inline-flex; align-items: center; gap: 10px; }
     .status::before {
       content: ""; width: 7px; height: 7px; border-radius: 50%; background: #35d07f;
@@ -182,7 +180,7 @@
     .portrait { aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
     .portrait img { width: 100%; height: 100%; object-fit: cover; }
     .portrait .ph { height: 100%; background: linear-gradient(160deg, #1b2a52, #0b1020 70%); }
-    .bio { font-family: var(--display); font-size: clamp(22px, 2.4vw, 30px); line-height: 1.35; letter-spacing: -0.01em; margin: 28px 0 56px; }
+    .bio { font-family: var(--display); font-size: clamp(22px, 2.4vw, 30px); line-height: 1.35; letter-spacing: -0.01em; margin: 28px 0 56px; font-weight: 400; }
     .bio em { font-style: normal; color: var(--blue-soft); }
     .lists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
     .lists .label { display: block; margin-bottom: 14px; }
@@ -246,6 +244,19 @@
     .gallery iframe { width: 100%; height: 100%; border: 0; }
 
 
+
+    .soft { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: var(--blue-soft); }
+    h1 .soft { -webkit-text-fill-color: currentColor; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+      font-family: var(--display); font-weight: 500; font-size: 16px;
+      padding: 14px 24px; border-radius: 999px; border: 1px solid var(--line-strong);
+      transition: background .2s, border-color .2s, transform .3s var(--ease);
+    }
+    .pill:hover { transform: translateY(-2px); border-color: var(--text); }
+    .pill.primary { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 10px 30px -10px var(--blue); }
+
     /* ---------- Formas y figuras ---------- */
     .shapes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
     .orbit {
@@ -293,7 +304,6 @@
       nav { gap: 18px; }
       nav a:not(.cta) { display: none; }
       section { padding: 88px 0; }
-      .hero-stats { gap: 28px; }
       .lists { grid-template-columns: 1fr; }
       .card-meta { flex-wrap: wrap; gap: 4px 12px; }
       .card-meta .tag { flex-basis: 100%; padding-left: 28px; }
@@ -348,13 +358,12 @@
       </div>
       <div class="container">
         <span class="label status">Disponible para proyectos — Medellín, CO</span>
-        <h1>Diseño visual<br />para marcas que<br />quieren <span>conectar.</span></h1>
+        <h1>Hola, hago diseño<br />para marcas con<br />algo que <span class="soft">contar.</span></h1>
         <div class="hero-bottom">
-          <p>Diseñador gráfico enfocado en contenido para marcas, identidad visual, ilustración y fotografía.</p>
-          <div class="hero-stats">
-            <div><b>+30</b><span>piezas publicadas</span></div>
-            <div><b>3</b><span>marcas</span></div>
-            <div><b>4</b><span>disciplinas</span></div>
+          <p>Diseño contenido para redes, identidad visual, ilustración y fotografía. Me gusta que las cosas se vean bien, pero sobre todo que funcionen.</p>
+          <div class="hero-actions">
+            <a class="pill primary" href="#trabajo">Ver proyectos ↓</a>
+            <a class="pill" href="#contacto">Escríbeme</a>
           </div>
         </div>
       </div>
@@ -371,7 +380,7 @@
         <div class="section-head">
           <div>
             <span class="label">01 — Trabajo seleccionado</span>
-            <h2>Proyectos</h2>
+            <h2>Cosas que <span class="soft">he hecho</span></h2>
           </div>
           <div class="filters" id="filters"></div>
         </div>
@@ -392,6 +401,7 @@
         </div>
         <div>
           <span class="label">02 — Sobre mí</span>
+          <h2>Un poco <span class="soft">de mí</span></h2>
           <p class="bio">Diseño piezas que <em>se ven bien y funcionan</em>: contenido para redes, identidad visual e ilustración, con una mirada de marketing y resultados.</p>
           <div class="lists">
             <div>
@@ -437,7 +447,7 @@
       </div>
       <div class="container">
         <span class="label">03 — Contacto</span>
-        <h2>Hablemos.</h2>
+        <h2>¿Hacemos algo <span class="soft">juntos?</span></h2>
         <a class="btn" href="mailto:hola@tunombre.com">hola@tunombre.com <span aria-hidden="true">→</span></a>
         <div class="socials">
           <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
