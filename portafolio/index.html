@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio — Tu Nombre</title>
+  <meta name="description" content="Portafolio de diseño: identidad visual, editorial, digital e ilustración." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f1ec;
+      --surface: #ffffff;
+      --text: #141414;
+      --muted: #6b6760;
+      --border: #dcd6cc;
+      --accent: #e8462a;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Inter", Arial, Helvetica, sans-serif;
+      --radius: 12px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --surface: #1c1c1c;
+        --text: #f1eee8;
+        --muted: #a29d94;
+        --border: #2e2c29;
+        --accent: #ff6a4d;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Header ---------- */
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    header .container {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; gap: 16px;
+    }
+    .logo { font-family: var(--serif); font-size: 26px; text-decoration: none; letter-spacing: -0.01em; }
+    nav { display: flex; gap: 28px; }
+    nav a { text-decoration: none; font-size: 14px; color: var(--muted); transition: color .2s; }
+    nav a:hover { color: var(--text); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 96px 0 72px; }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px;
+      margin-bottom: 32px;
+    }
+    .status::before {
+      content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2fbf71;
+    }
+    .hero h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(48px, 9vw, 128px);
+      line-height: .95; letter-spacing: -0.02em; margin: 0 0 32px;
+    }
+    .hero h1 em { color: var(--accent); }
+    .hero p { max-width: 560px; font-size: 18px; color: var(--muted); margin: 0; }
+
+    /* ---------- Trabajo ---------- */
+    section { padding: 72px 0; }
+    .section-head {
+      display: flex; align-items: end; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    h2 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(36px, 5vw, 56px); line-height: 1; margin: 0;
+    }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filters button {
+      font: inherit; font-size: 14px; cursor: pointer;
+      background: none; color: var(--text);
+      border: 1px solid var(--border); border-radius: 999px; padding: 8px 16px;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .filters button:hover { border-color: var(--text); }
+    .filters button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .card { cursor: pointer; text-align: left; background: none; border: 0; padding: 0; font: inherit; color: inherit; }
+    .card.hidden { display: none; }
+    .card .thumb {
+      aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden;
+      background: var(--surface); position: relative;
+    }
+    .card .thumb img, .card .thumb .ph {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s cubic-bezier(.2,.7,.2,1);
+    }
+    .card:hover .thumb img, .card:hover .thumb .ph { transform: scale(1.04); }
+    .ph {
+      display: grid; place-items: center;
+      font-family: var(--serif); font-size: clamp(56px, 8vw, 96px); color: rgba(255,255,255,.9);
+    }
+    .card .meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; }
+    .card h3 { margin: 0; font-size: 18px; font-weight: 500; }
+    .card .meta span { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    .card .cat { color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+    /* ---------- Sobre mí ---------- */
+    .about { border-top: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; }
+    .portrait {
+      aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden;
+      background: var(--surface);
+    }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; }
+    .portrait .ph { height: 100%; background: linear-gradient(160deg, #c9b9a3, #7d6b58); }
+    .bio { font-size: 22px; line-height: 1.5; margin: 24px 0 48px; }
+    .lists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .lists h4 {
+      margin: 0 0 12px; font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
+    }
+    .lists ul { list-style: none; margin: 0; padding: 0; }
+    .lists li { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+
+    /* ---------- Contacto ---------- */
+    .contact { border-top: 1px solid var(--border); padding: 120px 0; }
+    .contact p { color: var(--muted); margin: 0 0 16px; }
+    .mail {
+      font-family: var(--serif); font-size: clamp(36px, 7vw, 96px);
+      line-height: 1.05; text-decoration: none; display: inline-block;
+      word-break: break-word; transition: color .2s;
+    }
+    .mail:hover { color: var(--accent); }
+    .socials { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 40px; }
+    .socials a { text-decoration: none; font-size: 15px; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
+    .socials a:hover { border-color: var(--text); }
+
+    footer { border-top: 1px solid var(--border); padding: 24px 0; font-size: 13px; color: var(--muted); }
+    footer .container { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    /* ---------- Modal de proyecto ---------- */
+    dialog {
+      width: min(1000px, 100% - 32px); max-height: calc(100% - 32px);
+      border: 0; border-radius: var(--radius); padding: 0;
+      background: var(--bg); color: var(--text);
+    }
+    dialog::backdrop { background: rgba(0,0,0,.6); backdrop-filter: blur(4px); }
+    .modal-inner { padding: 40px; }
+    .modal-close {
+      position: sticky; top: 16px; float: right; margin: 16px 16px 0 0;
+      width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 20px; line-height: 1;
+    }
+    .modal-inner h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 5vw, 56px); line-height: 1; margin: 0 0 16px; }
+    .modal-info { display: flex; flex-wrap: wrap; gap: 8px 32px; color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    .modal-info b { color: var(--text); font-weight: 500; }
+    .modal-desc { font-size: 18px; max-width: 680px; margin: 0 0 32px; }
+    .gallery { display: grid; gap: 16px; }
+    .gallery img, .gallery .ph { width: 100%; border-radius: 8px; }
+    .gallery .ph { aspect-ratio: 16 / 9; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 800px) {
+      nav { gap: 18px; }
+      .hero { padding: 64px 0 48px; }
+      .grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .portrait { max-width: 360px; }
+      .lists { grid-template-columns: 1fr; }
+      .modal-inner { padding: 24px; }
+      .contact { padding: 80px 0; }
+    }
+    @media (max-width: 420px) {
+      .container { padding: 0 16px; }
+      nav a:nth-child(2) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <a href="#" class="logo">Tu Nombre</a>
+      <nav>
+        <a href="#trabajo">Trabajo</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="container">
+        <span class="status">Disponible para proyectos</span>
+        <h1>Diseño que se<br /><em>entiende</em> y se recuerda.</h1>
+        <p>Soy diseñador/a gráfico/a en Medellín. Trabajo identidad visual, editorial y piezas digitales para marcas, fundaciones y proyectos culturales.</p>
+      </div>
+    </section>
+
+    <!-- ===== TRABAJO ===== -->
+    <section id="trabajo">
+      <div class="container">
+        <div class="section-head">
+          <h2>Trabajo seleccionado</h2>
+          <div class="filters" id="filters"></div>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== SOBRE MÍ ===== -->
+    <section id="sobre-mi" class="about">
+      <div class="container about-grid">
+        <div class="portrait">
+          <!-- Cambia esto por tu foto: <img src="assets/yo.jpg" alt="Tu Nombre" /> -->
+          <div class="ph">TN</div>
+        </div>
+        <div>
+          <h2>Sobre mí</h2>
+          <p class="bio">Llevo X años diseñando sistemas visuales que funcionan en el mundo real. Me interesa la tipografía, la claridad y que cada pieza tenga una razón de ser.</p>
+          <div class="lists">
+            <div>
+              <h4>Servicios</h4>
+              <ul>
+                <li>Identidad visual</li>
+                <li>Diseño editorial</li>
+                <li>Diseño digital / UI</li>
+                <li>Ilustración</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Herramientas</h4>
+              <ul>
+                <li>Illustrator</li>
+                <li>InDesign</li>
+                <li>Photoshop</li>
+                <li>Figma</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Clientes</h4>
+              <ul>
+                <li>Cliente uno</li>
+                <li>Cliente dos</li>
+                <li>Cliente tres</li>
+                <li>Cliente cuatro</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTO ===== -->
+    <section id="contacto" class="contact">
+      <div class="container">
+        <p>¿Tienes un proyecto en mente?</p>
+        <a class="mail" href="mailto:hola@tunombre.com">hola@tunombre.com</a>
+        <div class="socials">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.behance.net/" target="_blank" rel="noopener">Behance</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© <span id="year"></span> Tu Nombre</span>
+      <span>Medellín, Colombia</span>
+    </div>
+  </footer>
+
+  <!-- Detalle de proyecto -->
+  <dialog id="modal" aria-labelledby="m-title">
+    <button class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
+    <div class="modal-inner">
+      <h3 id="m-title"></h3>
+      <div class="modal-info" id="m-info"></div>
+      <p class="modal-desc" id="m-desc"></p>
+      <div class="gallery" id="m-gallery"></div>
+    </div>
+  </dialog>
+
+  <script>
+    /* =====================================================
+       TUS PROYECTOS — edita solo esta lista.
+       - imagen: la portada (ej. "assets/marca-cafe.jpg").
+         Si la dejas vacía, sale un bloque de color.
+       - galeria: imágenes que se ven al abrir el proyecto.
+       - color: color del bloque mientras no haya imagen.
+       ===================================================== */
+    const proyectos = [
+      {
+        titulo: "Café de Altura",
+        categoria: "Identidad",
+        año: 2026,
+        cliente: "Café de Altura",
+        rol: "Identidad visual, empaque",
+        descripcion: "Identidad completa para una marca de café de especialidad: logo, sistema tipográfico, paleta y empaques.",
+        imagen: "",
+        galeria: [],
+        color: "#6b4a3a"
+      },
+      {
+        titulo: "Revista Ciudad",
+        categoria: "Editorial",
+        año: 2025,
+        cliente: "Alcaldía de Medellín",
+        rol: "Dirección de arte, maquetación",
+        descripcion: "Diseño editorial de una revista trimestral sobre cultura urbana. Retícula, portadas y plantillas.",
+        imagen: "",
+        galeria: [],
+        color: "#2f5d8a"
+      },
+      {
+        titulo: "App Huerta",
+        categoria: "Digital",
+        año: 2025,
+        cliente: "Huerta Co.",
+        rol: "UI, sistema de diseño",
+        descripcion: "Interfaz para una app de agricultura urbana. Componentes, iconografía y prototipo en Figma.",
+        imagen: "",
+        galeria: [],
+        color: "#3f7a4f"
+      },
+      {
+        titulo: "Festival Sonoro",
+        categoria: "Ilustración",
+        año: 2024,
+        cliente: "Festival Sonoro",
+        rol: "Ilustración, afiches",
+        descripcion: "Serie de afiches ilustrados y piezas para redes del festival de música independiente.",
+        imagen: "",
+        galeria: [],
+        color: "#c2492f"
+      }
+    ];
+
+    /* ---------- A partir de aquí no hace falta tocar nada ---------- */
+    const grid = document.getElementById("grid");
+    const filters = document.getElementById("filters");
+    const modal = document.getElementById("modal");
+
+    function visual(src, color, label, alt) {
+      return src
+        ? `<img src="${src}" alt="${alt}" loading="lazy" />`
+        : `<div class="ph" style="background:${color}">${label}</div>`;
+    }
+
+    // Tarjetas
+    grid.innerHTML = proyectos.map((p, i) => `
+      <button class="card" data-cat="${p.categoria}" data-i="${i}">
+        <div class="thumb">${visual(p.imagen, p.color, p.titulo.charAt(0), p.titulo)}</div>
+        <div class="meta"><h3>${p.titulo}</h3><span>${p.año}</span></div>
+        <div class="cat">${p.categoria}</div>
+      </button>`).join("");
+
+    // Filtros
+    const cats = ["Todo", ...new Set(proyectos.map(p => p.categoria))];
+    filters.innerHTML = cats.map((c, i) =>
+      `<button class="${i === 0 ? "active" : ""}" data-cat="${c}">${c}</button>`).join("");
+    filters.addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      filters.querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
+      grid.querySelectorAll(".card").forEach(card => {
+        card.classList.toggle("hidden", btn.dataset.cat !== "Todo" && card.dataset.cat !== btn.dataset.cat);
+      });
+    });
+
+    // Detalle
+    grid.addEventListener("click", e => {
+      const card = e.target.closest(".card");
+      if (!card) return;
+      const p = proyectos[card.dataset.i];
+      document.getElementById("m-title").textContent = p.titulo;
+      document.getElementById("m-info").innerHTML =
+        `<span><b>Cliente</b> ${p.cliente}</span><span><b>Rol</b> ${p.rol}</span><span><b>Año</b> ${p.año}</span>`;
+      document.getElementById("m-desc").textContent = p.descripcion;
+      const imgs = p.galeria.length ? p.galeria : [p.imagen];
+      document.getElementById("m-gallery").innerHTML =
+        imgs.map(src => visual(src, p.color, p.titulo.charAt(0), p.titulo)).join("");
+      modal.showModal();
+      modal.scrollTop = 0;
+    });
+    document.getElementById("modal-close").addEventListener("click", () => modal.close());
+    modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
