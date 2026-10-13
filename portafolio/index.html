@@ -164,6 +164,13 @@
       opacity: 0; transform: translateY(8px); transition: all .4s var(--ease);
     }
     .card:hover .thumb::after, .card:focus-visible .thumb::after { opacity: 1; transform: none; }
+    .thumb .cover-text {
+      position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
+      background: linear-gradient(180deg, rgba(5,7,13,.25), rgba(5,7,13,.6));
+      font-family: var(--display); font-weight: 600; letter-spacing: -0.04em; color: #fff;
+      font-size: clamp(56px, 11vw, 168px); text-shadow: 0 6px 40px rgba(0,0,0,.5);
+    }
+    .card.wide .thumb img { object-fit: cover; }
     .ph {
       display: grid; place-items: center;
       font-family: var(--display); font-weight: 500; font-size: clamp(48px, 7vw, 96px);
@@ -547,10 +554,11 @@
         titulo: "Patrones",
         categoria: "Patrones & Ilustración",
         año: 2025,
-        cliente: "Universidad de los Andes",
+        cliente: "Universidad de los Andes · DISO-[código]",
         rol: "Diseño de patrones, color y mockups",
         descripcion: "Tres colecciones de patrones para ropa de playa: Psicotrópico, Isla Madre y Esencia Tropical. Cada una tiene un patrón principal, variaciones de color y un coordinado, aplicados en vestidos de baño, pantalonetas y libretas. [Cuenta en una o dos líneas el encargo o la idea detrás de las colecciones.]",
-        imagen: "assets/patrones/portada.jpg",
+        imagen: "assets/patrones/portada-patron.jpg",
+        textoPortada: "Patrones",
         galeria: [
           "assets/patrones/vestido-morado.jpg", "assets/patrones/vestido-blanco.jpg", "assets/patrones/vestido-verde.jpg",
           "assets/patrones/pantaloneta-rosa.jpg", "assets/patrones/pantaloneta-azul.jpg",
@@ -639,7 +647,7 @@
     // Tarjetas
     grid.innerHTML = proyectos.map((p, i) => `
       <button class="card${p.ancho ? " wide" : ""}" data-cat="${p.categoria}" data-i="${i}">
-        <div class="thumb">${visual(p.imagen, p.color, initials(p.titulo), p.titulo)}</div>
+        <div class="thumb">${visual(p.imagen, p.color, initials(p.titulo), p.titulo)}${p.textoPortada ? `<span class="cover-text">${p.textoPortada}</span>` : ""}</div>
         <div class="card-meta">
           <span class="num">${String(i + 1).padStart(2, "0")}</span>
           <h3>${p.titulo}</h3>
