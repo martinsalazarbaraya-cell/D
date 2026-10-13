@@ -251,6 +251,7 @@
     .m-sec p { margin: 0; color: var(--muted); max-width: 640px; }
     .gallery.contain img { object-fit: contain; background: var(--surface); }
     .vid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .vid-grid:has(> :only-child) { grid-template-columns: 1fr; }
     .vid-grid.vertical { grid-template-columns: repeat(4, 1fr); }
     .vid-grid.vertical .player { aspect-ratio: 9 / 16; }
     .vid-grid .player { background: radial-gradient(circle at 50% 40%, #1b2a52, #070b16); }
@@ -693,7 +694,10 @@
         imagen: "assets/audiovisual/portada.jpg",
         textoPortada: "Audiovisual",
         secciones: [
-          { titulo: "Trabajos universitarios", texto: "[Título y descripción de cada video.]", videos: [
+          { titulo: "Constelaciones de la plaza", texto: "Edición de video para un dispositivo pedagógico instalado en la Plazoleta del Rosario, en Bogotá. El proyecto invita a leer la plaza como un espacio de encuentro y a pensar, desde la imagen, las formas de habitar lo público. Universidad de los Andes · Estudio 4: Coimaginar ciudadanías (DISO-3118).", videos: [
+            { titulo: "Constelaciones de la plaza", url: "https://youtu.be/CUQ9_jMd5II" }
+          ] },
+          { titulo: "Otros trabajos universitarios", texto: "[Título y descripción de cada video.]", videos: [
             { titulo: "Video 1", url: "https://youtu.be/bpea2HG3o_g" },
             { titulo: "Video 2", url: "https://youtu.be/vk-TcWrIGLk" }
           ] }
