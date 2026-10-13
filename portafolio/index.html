@@ -243,6 +243,9 @@
     .m-info { display: grid; grid-template-columns: repeat(3, 1fr) 2fr; gap: 32px; border-top: 1px solid var(--line); padding-top: 28px; }
     .m-info .label { display: block; margin-bottom: 6px; color: var(--muted); }
     .m-info p { margin: 0; }
+    .m-link { margin-top: 20px; white-space: nowrap; }
+    @media (min-width: 901px) { .m-info .wide-desc { grid-column: 3 / 5; } }
+    .gallery.single img { max-width: 560px; margin: 0 auto; }
     .m-desc { font-size: 17px; color: #c8cee0; }
     .gallery { display: grid; gap: 20px; padding-bottom: 96px; }
     .gallery img, .gallery .ph, .gallery .video { width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
@@ -575,6 +578,20 @@
         ancho: true
       },
       {
+        titulo: "10 mm",
+        categoria: "Narrativa sonora",
+        año: "",
+        cliente: "Universidad de los Andes · Proyecto en equipo",
+        rol: "Ilustración de portada, actuación de voz y colaboración en edición",
+        descripcion: "Podcast de ficción creado con compañeras de la universidad. [Pega aquí la descripción de SoundCloud.]",
+        imagen: "assets/podcast/portada.jpg",
+        galeria: ["assets/podcast/10mm.jpg"],
+        enlace: "https://on.soundcloud.com/4hZADXdUdouS2fK6GF",
+        enlaceTexto: "Escuchar en SoundCloud",
+        video: "",
+        color: "#d00013"
+      },
+      {
         titulo: "Ilustración botánica",
         categoria: "Ilustración y dibujo",
         año: 2025,
@@ -667,7 +684,7 @@
         <div class="card-meta">
           <span class="num">${String(i + 1).padStart(2, "0")}</span>
           <h3>${p.titulo}</h3>
-          <span class="tag">${p.categoria} · ${p.año}</span>
+          <span class="tag">${p.categoria}${p.año ? " · " + p.año : ""}</span>
         </div>
       </button>`).join("");
 
@@ -697,12 +714,13 @@
       $("m-info").innerHTML = `
         <div><span class="label">Cliente</span><p>${p.cliente}</p></div>
         <div><span class="label">Rol</span><p>${p.rol}</p></div>
-        <div><span class="label">Año</span><p>${p.año}</p></div>
-        <div><span class="label">Sobre el proyecto</span><p class="m-desc">${p.descripcion}</p></div>`;
+        ${p.año ? `<div><span class="label">Año</span><p>${p.año}</p></div>` : ""}
+        <div${p.año ? "" : ' class="wide-desc"'}><span class="label">Sobre el proyecto</span><p class="m-desc">${p.descripcion}</p>${p.enlace ? `<a class="pill primary m-link" href="${p.enlace}" target="_blank" rel="noopener">${p.enlaceTexto || "Ver proyecto"} ↗</a>` : ""}</div>`;
       const video = p.video ? `<div class="video"><iframe src="${embed(p.video)}" title="${p.titulo}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : "";
       const imgs = p.galeria.length ? p.galeria : (p.video ? [] : [p.imagen]);
       $("m-gallery").style.gridTemplateColumns = p.columnas && innerWidth > 640 ? `repeat(${p.columnas}, 1fr)` : "";
       $("m-gallery").classList.toggle("grid-mode", !!p.columnas);
+      $("m-gallery").classList.toggle("single", p.galeria.length === 1);
       $("m-gallery").innerHTML = video + imgs.map(src => visual(src, p.color, initials(p.titulo), p.titulo)).join("");
       if (!modal.open) { modal.showModal(); document.body.style.overflow = "hidden"; }
       modal.scrollTop = 0;
