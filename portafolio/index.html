@@ -648,7 +648,7 @@
         imagen: "assets/marini/portada.jpg",
         textoPortada: "Marini Star",
         secciones: [
-          { titulo: "Diseño de ropa", texto: "Estampados para camisetas: Vespa Tour Club en dos colores y una camiseta con bordados de estampillas inspiradas en Italia.", imagenes: ["assets/marini/vespa-blanco.jpg", "assets/marini/vespa-azul.jpg", "assets/marini/bordados.jpg"] },
+          { titulo: "Diseño de ropa", texto: "Estampados para camisetas: Vespa Tour Club y una camiseta con bordados de estampillas inspiradas en Italia. Arriba el diseño, abajo la prenda terminada.", imagenes: ["assets/marini/vespa-blanco.jpg", "assets/marini/bordados.jpg", "assets/marini/prenda-vespa.jpg", "assets/marini/prenda-bordados.jpg"], columnas: 2 },
           { titulo: "Posts y diseño gráfico", texto: "Piezas para Instagram: lanzamientos de producto, detalles de estampados, un catálogo de outfits y una pieza de tendencia. La ilustración de la caja se generó con IA; la idea y la composición son mías.", imagenes: ["assets/marini/post-1.jpg", "assets/marini/post-2.jpg", "assets/marini/post-3.jpg", "assets/marini/post-4.jpg", "assets/marini/post-5.jpg", "assets/marini/post-9.jpg"], ajuste: "contain" },
           { titulo: "Carrusel: Mini Me", texto: "Cada modelo junto a su versión ilustrada. Las ilustraciones se generaron con IA; la idea, la dirección y la composición son mías.", imagenes: ["assets/marini/post-6.jpg", "assets/marini/post-7.jpg", "assets/marini/post-8.jpg"] },
           { titulo: "Carrusel: escoge tu estampado", texto: "Carrusel interactivo de cuatro láminas: cada línea de color lleva a un estampado de la colección.", imagenes: ["assets/marini/carrusel-1.jpg", "assets/marini/carrusel-2.jpg", "assets/marini/carrusel-3.jpg", "assets/marini/carrusel-4.jpg"], columnas: 4 },
@@ -747,7 +747,7 @@
         $("m-gallery").innerHTML = p.secciones.filter(sec => sec.imagenes.length).map(sec => `
           <div class="m-sec">
             <h4>${sec.titulo}</h4>${sec.texto ? `<p>${sec.texto}</p>` : ""}
-            <div class="gallery grid-mode${sec.ajuste === "contain" ? " contain" : ""}" style="grid-template-columns:${innerWidth > 640 ? `repeat(${sec.columnas || 3}, 1fr)` : (sec.columnas === 4 ? "1fr 1fr" : "1fr")};padding-bottom:0">${sec.imagenes.map(src => `<img src="${src}" alt="${sec.titulo}" loading="lazy" />`).join("")}</div>
+            <div class="gallery grid-mode${sec.ajuste === "contain" ? " contain" : ""}" style="grid-template-columns:${innerWidth > 640 ? `repeat(${sec.columnas || 3}, 1fr)` : (sec.columnas >= 2 ? "1fr 1fr" : "1fr")};padding-bottom:0">${sec.imagenes.map(src => `<img src="${src}" alt="${sec.titulo}" loading="lazy" />`).join("")}</div>
           </div>`).join("");
       } else
       $("m-gallery").innerHTML = video + imgs.map(src => visual(src, p.color, initials(p.titulo), p.titulo)).join("");
