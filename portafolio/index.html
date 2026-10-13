@@ -171,6 +171,7 @@
       font-size: clamp(56px, 11vw, 168px); text-shadow: 0 6px 40px rgba(0,0,0,.5);
     }
     .thumb .cover-text.bottom { place-items: end start; padding: 0 0 28px 36px; background: linear-gradient(180deg, rgba(5,7,13,0) 45%, rgba(5,7,13,.65)); }
+    .thumb .cover-text.under-logo { place-items: center; transform: translateY(24%); background: none; font-size: clamp(28px, 4.6vw, 64px); letter-spacing: -0.02em; }
     .card.wide .thumb img { object-fit: cover; }
     .ph {
       display: grid; place-items: center;
@@ -623,6 +624,8 @@
         rol: "Diseñador gráfico",
         descripcion: "Contenido para Instagram: carruseles de perfil que cuentan la historia de la asociación a través de sus líderes, la campaña de Adviento e historias informativas. [Agrega el reto o algún resultado si lo tienes.]",
         imagen: "assets/asc/portada.jpg",
+        textoPortada: "Asociación Santa Cruz",
+        textoBajoLogo: true,
         galeria: [
           "assets/asc/perfil-jc-1.jpg", "assets/asc/perfil-jc-2.jpg", "assets/asc/perfil-jc-3.jpg",
           "assets/asc/perfil-jc-4.jpg", "assets/asc/perfil-monsenor-1.jpg", "assets/asc/perfil-monsenor-2.jpg",
@@ -692,7 +695,7 @@
     // Tarjetas
     grid.innerHTML = proyectos.map((p, i) => `
       <button class="card${p.ancho ? " wide" : ""}" data-cat="${p.categoria}" data-i="${i}">
-        <div class="thumb">${visual(p.imagen, p.color, initials(p.titulo), p.titulo)}${p.textoPortada ? `<span class="cover-text${p.textoAbajo ? " bottom" : ""}">${p.textoPortada}</span>` : ""}</div>
+        <div class="thumb">${visual(p.imagen, p.color, initials(p.titulo), p.titulo)}${p.textoPortada ? `<span class="cover-text${p.textoAbajo ? " bottom" : ""}${p.textoBajoLogo ? " under-logo" : ""}">${p.textoPortada}</span>` : ""}</div>
         <div class="card-meta">
           <span class="num">${String(i + 1).padStart(2, "0")}</span>
           <h3>${p.titulo}</h3>
