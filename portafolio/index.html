@@ -536,20 +536,47 @@
                   Vacía = bloque de color.
        - galeria: imágenes que se ven al abrir el proyecto.
        - video:   link de YouTube o Vimeo (opcional).
+       - columnas: 2 o 3 = la galería se ve en cuadrícula
+                  (ideal para posts de Instagram).
        - ancho:   true = la tarjeta ocupa todo el ancho (úsalo
                   en 1 o 2 proyectos destacados).
        ===================================================== */
     const proyectos = [
       {
+        titulo: "Patrones",
+        categoria: "Patrones & Ilustración",
+        año: 2025,
+        cliente: "Universidad de los Andes",
+        rol: "Diseño de patrones y aplicación",
+        descripcion: "Serie de patrones tropicales y geométricos aplicados en vestidos de baño y libretas. [Cuenta en una o dos líneas el encargo o la idea detrás de la colección.]",
+        imagen: "assets/patrones/portada.jpg",
+        galeria: [
+          "assets/patrones/vestido-morado.jpg", "assets/patrones/vestido-blanco.jpg", "assets/patrones/vestido-verde.jpg",
+          "assets/patrones/vestido-blanco-perfil.jpg", "assets/patrones/libreta-felinos.jpg", "assets/patrones/libreta-frutas.jpg",
+          "assets/patrones/esencia-tropical-1.jpg", "assets/patrones/esencia-tropical-2.jpg", "assets/patrones/isla-madre.jpg"
+        ],
+        columnas: 3,
+        video: "",
+        color: "linear-gradient(135deg, #3d7bff, #142a66)",
+        ancho: true
+      },
+      {
         titulo: "Asociación Santa Cruz",
         categoria: "Redes & Marketing",
         año: 2025,
         cliente: "Asociación Santa Cruz",
-        rol: "Diseñador gráfico (4 meses)",
-        descripcion: "Diseño del contenido de Instagram, brochure y documentos institucionales. Cuenta aquí el reto, lo que hiciste y algún resultado (seguidores, alcance, interacción).",
-        imagen: "", galeria: [], video: "",
-        color: "linear-gradient(135deg, #1d3fa8, #0b1530)",
-        ancho: true
+        rol: "Diseñador gráfico",
+        descripcion: "Contenido para Instagram: carruseles de perfil que cuentan la historia de la asociación a través de sus líderes, la campaña de Adviento e historias informativas. [Agrega el reto o algún resultado si lo tienes.]",
+        imagen: "assets/asc/perfil-jc-1.jpg",
+        galeria: [
+          "assets/asc/perfil-jc-1.jpg", "assets/asc/perfil-jc-2.jpg", "assets/asc/perfil-jc-3.jpg",
+          "assets/asc/perfil-jc-4.jpg", "assets/asc/perfil-monsenor-1.jpg", "assets/asc/perfil-monsenor-2.jpg",
+          "assets/asc/adviento-1.jpg", "assets/asc/adviento-2.jpg", "assets/asc/adviento-3.jpg",
+          "assets/asc/adviento-4.jpg", "assets/asc/story-juandi.jpg", "assets/asc/story-misa.jpg"
+        ],
+        columnas: 3,
+        video: "",
+        color: "linear-gradient(135deg, #1d3fa8, #0b1530)"
       },
       {
         titulo: "Marca de ropa",
@@ -560,26 +587,6 @@
         descripcion: "Diseños de camisetas presentados en mockups, junto con posts y videos para Instagram.",
         imagen: "", galeria: [], video: "",
         color: "linear-gradient(135deg, #2a2f3d, #0d0f15)"
-      },
-      {
-        titulo: "Patrones",
-        categoria: "Ilustración",
-        año: 2024,
-        cliente: "Proyecto universitario",
-        rol: "Diseño de patrones",
-        descripcion: "Serie de patrones aplicados en tela, empaque y papelería.",
-        imagen: "", galeria: [], video: "",
-        color: "linear-gradient(135deg, #3d7bff, #142a66)"
-      },
-      {
-        titulo: "Ilustraciones",
-        categoria: "Ilustración",
-        año: 2024,
-        cliente: "Personal / Universidad",
-        rol: "Ilustración",
-        descripcion: "Selección de ilustraciones agrupadas por serie.",
-        imagen: "", galeria: [], video: "",
-        color: "linear-gradient(135deg, #16203a, #05070d)"
       },
       {
         titulo: "Fotografía",
@@ -664,6 +671,7 @@
         <div><span class="label">Sobre el proyecto</span><p class="m-desc">${p.descripcion}</p></div>`;
       const video = p.video ? `<div class="video"><iframe src="${embed(p.video)}" title="${p.titulo}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : "";
       const imgs = p.galeria.length ? p.galeria : (p.video ? [] : [p.imagen]);
+      $("m-gallery").style.gridTemplateColumns = p.columnas && innerWidth > 640 ? `repeat(${p.columnas}, 1fr)` : "";
       $("m-gallery").innerHTML = video + imgs.map(src => visual(src, p.color, initials(p.titulo), p.titulo)).join("");
       if (!modal.open) { modal.showModal(); document.body.style.overflow = "hidden"; }
       modal.scrollTop = 0;
