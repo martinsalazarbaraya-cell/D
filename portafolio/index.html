@@ -436,6 +436,10 @@
     .pill.primary { box-shadow: none; }
     .play { background: rgba(8,9,12,.55); }
     .player:hover .play { background: var(--blue); }
+    .cv-btn { display: inline-flex; align-items: center; gap: 14px; margin-top: 40px; padding: 16px 22px; text-decoration: none; color: var(--text); border: 1px solid var(--line-strong); border-radius: var(--radius); font-family: var(--display); font-weight: 500; font-size: 17px; transition: border-color .2s, background .2s; }
+    .cv-btn small { font: 500 11px var(--sans); letter-spacing: .1em; color: var(--muted); }
+    .cv-btn b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 500; }
+    .cv-btn:hover { border-color: var(--blue); background: rgba(74,111,209,.08); }
   </style>
 </head>
 <body>
@@ -532,8 +536,9 @@
         <h2>Escríbeme.</h2>
         <a class="btn" href="mailto:martinsalazarbaraya@gmail.com">martinsalazarbaraya@gmail.com <span aria-hidden="true">→</span></a>
         <div class="socials">
-          <a href="https://www.behance.net/martinsalazar11" target="_blank" rel="noopener">Behance</a>
+          <a href="https://www.linkedin.com/in/martin-salazar-baraya-625711310" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
+        <a class="cv-btn" href="assets/Martin_Salazar_CV.pdf" target="_blank" rel="noopener"><span>Hoja de vida</span><small>PDF</small><b aria-hidden="true">↓</b></a>
       </div>
     </section>
   </main>
@@ -590,11 +595,11 @@
         textoPortada: "Marini Star",
         secciones: [
           { titulo: "Diseño de ropa", texto: "Estampados para camisetas: Vespa Tour Club y una camiseta con bordados de estampillas inspiradas en Italia. Arriba el diseño, abajo la prenda terminada.", imagenes: ["assets/marini/vespa-blanco.jpg", "assets/marini/bordados.jpg", "assets/marini/prenda-vespa.jpg", "assets/marini/prenda-bordados.jpg"], columnas: 2 },
-          { titulo: "Posts y diseño gráfico", texto: "Piezas para Instagram: lanzamientos de producto, detalles de estampados, un catálogo de outfits y una pieza de tendencia. La ilustración de la caja se generó con IA; la idea y la composición son mías.", imagenes: ["assets/marini/post-1.jpg", "assets/marini/post-2.jpg", "assets/marini/post-3.jpg", "assets/marini/post-4.jpg", "assets/marini/post-5.jpg", "assets/marini/post-9.jpg"], ajuste: "contain" },
+          { titulo: "Posts y diseño gráfico", texto: "Piezas para Instagram: lanzamientos de producto, detalles de estampados y piezas de campaña.", imagenes: ["assets/marini/post-1.jpg", "assets/marini/post-2.jpg", "assets/marini/post-3.jpg", "assets/marini/post-9.jpg"], columnas: 4, ajuste: "contain" },
           { titulo: "Carrusel: Mini Me", texto: "Cada modelo junto a su versión ilustrada. Las ilustraciones se generaron con IA; la idea, la dirección y la composición son mías.", imagenes: ["assets/marini/post-6.jpg", "assets/marini/post-7.jpg", "assets/marini/post-8.jpg"] },
-          { titulo: "Carrusel: escoge tu estampado", texto: "Carrusel interactivo de cuatro láminas: cada línea de color lleva a un estampado de la colección.", imagenes: ["assets/marini/carrusel-1.jpg", "assets/marini/carrusel-2.jpg", "assets/marini/carrusel-3.jpg", "assets/marini/carrusel-4.jpg"], columnas: 4 },
+          { titulo: "Carrusel: escoge tu estampado", texto: "Carrusel interactivo de cuatro láminas: cada línea de color lleva a un estampado de la colección.", imagenes: ["assets/marini/carrusel-2.jpg", "assets/marini/carrusel-3.jpg", "assets/marini/carrusel-4.jpg"] },
           { titulo: "Carrusel: Prendas top", texto: "Carrusel editorial tipo collage con las prendas más vendidas: Pantapremium, para dentro y fuera del agua, en 3 colores.", imagenes: ["assets/marini/top-1.jpg", "assets/marini/top-2.jpg", "assets/marini/top-3.jpg"] },
-          { titulo: "Carrusel: Pantapremium", texto: "Carrusel de producto: la prenda puesta, una lámina con sus características y la prueba en el agua.", imagenes: ["assets/marini/panta-1.jpg", "assets/marini/panta-2.jpg", "assets/marini/panta-3.jpg"] },
+          { titulo: "Carrusel: Pantapremium", texto: "Carrusel de producto: la prenda puesta y la prueba en el agua.", imagenes: ["assets/marini/panta-1.jpg", "assets/marini/panta-3.jpg"], columnas: 2 },
           { titulo: "Fotografía", texto: "Fotos de la sesión de producto 2025.", imagenes: ["assets/marini/sesion-8.jpg", "assets/marini/sesion-1.jpg", "assets/marini/sesion-2.jpg", "assets/marini/sesion-3.jpg", "assets/marini/sesion-4.jpg", "assets/marini/sesion-5.jpg", "assets/marini/sesion-6.jpg", "assets/marini/sesion-7.jpg"], columnas: 4 }
         ],
         galeria: [],
@@ -612,9 +617,9 @@
         imagen: "assets/asc/portada.jpg",
         textoPortada: "ASC",
         secciones: [
-          { titulo: "Posts y piezas de campaña", texto: "Piezas para eventos y convocatorias: retiros, temporadas de campos de verano y eventos de recaudación con aliados como Cyglo.", imagenes: ["assets/asc/post-1.jpg", "assets/asc/post-2.jpg", "assets/asc/post-3.jpg", "assets/asc/post-4.jpg"], columnas: 4, ajuste: "contain" },
+          { titulo: "Posts y piezas de campaña", texto: "Piezas para eventos y convocatorias: retiros, temporadas de campos de verano y eventos de recaudación con aliados como Cyglo.", imagenes: ["assets/asc/post-1.jpg", "assets/asc/post-2.jpg", "assets/asc/post-4.jpg"], columnas: 3, ajuste: "contain" },
           { titulo: "Carrusel: el camino del dirigente EKO", texto: "Carrusel que explica el rol de los dirigentes de los campos de verano EKO, paso a paso, y cierra con una invitación a donar.", imagenes: ["assets/asc/eko-1.jpg", "assets/asc/eko-2.jpg", "assets/asc/eko-3.jpg", "assets/asc/eko-4.jpg", "assets/asc/eko-5.jpg"], columnas: 5 },
-          { titulo: "Carrusel: ¿Alguna vez conociste a Dios?", texto: "Carrusel de convocatoria para los campos de verano EKO. Cada lámina muestra una experiencia distinta del campo y cierra con las fechas e inscripciones de los cuatro programas.", imagenes: ["assets/asc/dios-1.jpg", "assets/asc/dios-2.jpg", "assets/asc/dios-3.jpg", "assets/asc/dios-4.jpg", "assets/asc/dios-5.jpg"], columnas: 5 }
+          { titulo: "Carrusel: ¿Alguna vez conociste a Dios?", texto: "Carrusel de convocatoria para los campos de verano EKO. Cada lámina muestra una experiencia distinta del campo.", imagenes: ["assets/asc/dios-3.jpg", "assets/asc/dios-4.jpg"], columnas: 2 }
         ],
         galeria: [],
         video: "",
@@ -648,7 +653,7 @@
       {
         titulo: "10 mm",
         categoria: "Narrativa sonora",
-        año: "",
+        año: 2024,
         cliente: "Universidad de los Andes · Proyecto en equipo",
         rol: "Ilustración de portada, actuación de voz y colaboración en edición",
         descripcion: "Lo que están a punto de escuchar es el testimonio de Jorge Aristizábal, uno de los tantos jóvenes afectados por la situación del país en el año 89. Desde hace un tiempo se despierta todos los días con el insoportable sentimiento de que no debería estar vivo. Esto es 10 milímetros.<br><br>Podcast de ficción realizado con Luna Robayo, Camila Moreno y María Paula Charry.",
@@ -682,17 +687,17 @@
       {
         titulo: "Audiovisual",
         categoria: "Audiovisual",
-        año: "",
+        año: "2023–2024",
         cliente: "Universidad de los Andes",
         rol: "Realización y edición",
         descripcion: "Trabajos audiovisuales hechos en la universidad.",
         imagen: "assets/audiovisual/portada.jpg",
         textoPortada: "Audiovisual",
         secciones: [
-          { titulo: "Ecos", texto: "Cortometraje de ficción sobre la pérdida y el duelo, realizado para el Taller Audiovisual de la Universidad de los Andes. Participé en la escritura del guion y estuve a cargo de la edición, construyendo el ritmo y los silencios que sostienen la historia. Realizado con Camila Moreno, Gregorio Camargo y María Paula Charry.", videos: [
+          { titulo: "Ecos · 2023", texto: "Cortometraje de ficción sobre la pérdida y el duelo, realizado para el Taller Audiovisual de la Universidad de los Andes. Participé en la escritura del guion y estuve a cargo de la edición, construyendo el ritmo y los silencios que sostienen la historia. Realizado con Camila Moreno, Gregorio Camargo y María Paula Charry.", videos: [
             { titulo: "Ecos", url: "https://youtu.be/bpea2HG3o_g", portada: "assets/audiovisual/ecos.jpg" }
           ] },
-          { titulo: "Terranovae", texto: "Proyecto para el curso Pensamiento Material de la Universidad de los Andes. Estuve a cargo de la edición de los videos de presentación de los tres materiales desarrollados, entre ellos Galaxium, mostrando su proceso, su textura y su comportamiento. Realizado con Juan Diego Villamil y Sofía Páez.", videos: [
+          { titulo: "Terranovae · 2024", texto: "Proyecto para el curso Pensamiento Material de la Universidad de los Andes. Estuve a cargo de la edición de los videos de presentación de los tres materiales desarrollados, entre ellos Galaxium, mostrando su proceso, su textura y su comportamiento. Realizado con Juan Diego Villamil y Sofía Páez.", videos: [
             { titulo: "Terranovae", url: "https://youtu.be/vk-TcWrIGLk", portada: "assets/audiovisual/terranovae.jpg" }
           ] }
         ],
