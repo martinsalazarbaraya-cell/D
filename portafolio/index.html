@@ -253,6 +253,11 @@
     .vid-grid.vertical { grid-template-columns: repeat(4, 1fr); }
     .vid-grid.vertical .player { aspect-ratio: 9 / 16; }
     .vid-grid .player { background: radial-gradient(circle at 50% 40%, #1b2a52, #070b16); }
+    .vid-link { display: block; }
+    .vid-link img { width: 100%; height: 100%; object-fit: cover; }
+    .vid-ph { position: absolute; inset: 0; display: grid; place-items: end start; padding: 20px; font-family: var(--display); font-size: 22px; color: var(--text); }
+    .vid-yt { position: absolute; right: 14px; top: 14px; font: 400 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #fff; background: rgba(5,7,13,.6); border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 10px; opacity: 0; transition: opacity .3s; }
+    .vid-link:hover .vid-yt { opacity: 1; }
     .vid-t { margin: 10px 0 0; color: var(--text); font-size: 15px; }
     @media (max-width: 640px) { .vid-grid { grid-template-columns: 1fr; } .vid-grid.vertical { grid-template-columns: 1fr 1fr; } }
     .m-link { margin-top: 20px; white-space: nowrap; }
@@ -760,7 +765,7 @@
         $("m-gallery").innerHTML = p.secciones.filter(sec => (sec.imagenes || []).length || (sec.videos || []).length).map(sec => sec.videos ? `
           <div class="m-sec">
             <h4>${sec.titulo}</h4>${sec.texto ? `<p>${sec.texto}</p>` : ""}
-            <div class="vid-grid${sec.vertical ? " vertical" : ""}">${sec.videos.map(v => `<div><div class="player" data-src="${embed(v.url)}" role="button" tabindex="0" aria-label="Reproducir ${v.titulo}"><span class="play"></span></div><p class="vid-t">${v.titulo}</p></div>`).join("")}</div>
+            <div class="vid-grid${sec.vertical ? " vertical" : ""}">${sec.videos.map(v => `<div><a class="player vid-link" href="${v.url}" target="_blank" rel="noopener" aria-label="Ver ${v.titulo} en YouTube">${v.portada ? `<img src="${v.portada}" alt="" loading="lazy" />` : `<span class="vid-ph">${v.titulo}</span>`}<span class="play"></span><span class="vid-yt">Ver en YouTube ↗</span></a><p class="vid-t">${v.titulo}</p></div>`).join("")}</div>
           </div>` : `
           <div class="m-sec">
             <h4>${sec.titulo}</h4>${sec.texto ? `<p>${sec.texto}</p>` : ""}
