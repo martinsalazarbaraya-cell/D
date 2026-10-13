@@ -257,6 +257,33 @@
     .pill:hover { transform: translateY(-2px); border-color: var(--text); }
     .pill.primary { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 10px 30px -10px var(--blue); }
 
+
+    /* ---------- Audiovisual ---------- */
+    .av { background: var(--bg-2); border-top: 1px solid var(--line); }
+    .av-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .av-item.featured { grid-column: span 2; }
+    .player {
+      position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden;
+      background: #000; border: 1px solid var(--line); cursor: pointer;
+    }
+    .player img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: transform .9s var(--ease), opacity .3s; }
+    .player:hover img { transform: scale(1.03); opacity: 1; }
+    .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .play {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(5,7,13,.55); backdrop-filter: blur(8px); border: 1px solid var(--line-strong);
+      transition: background .3s, transform .3s var(--ease);
+    }
+    .play::before { content: ""; margin-left: 5px; border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent #fff; }
+    .player:hover .play { background: var(--blue); transform: translate(-50%, -50%) scale(1.08); }
+    .av-meta { display: flex; align-items: baseline; gap: 16px; margin-top: 18px; }
+    .av-meta .num { font: 400 12px var(--mono); color: var(--blue-soft); }
+    .av-meta h3 { margin: 0; flex: 1; font-family: var(--display); font-weight: 500; font-size: 22px; }
+    .av-meta .tag { font-size: 13px; color: var(--muted); white-space: nowrap; }
+    .av-desc { margin: 6px 0 0 34px; color: var(--muted); font-size: 15px; max-width: 640px; }
+    @media (max-width: 900px) { .av-grid { grid-template-columns: 1fr; } .av-item.featured { grid-column: auto; } }
+
     /* ---------- Formas y figuras ---------- */
     .shapes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
     .orbit {
@@ -325,6 +352,7 @@
       <a href="#" class="logo"><i></i>Martín Salazar</a>
       <nav>
         <a href="#trabajo">Trabajo</a>
+        <a href="#audiovisual">Audiovisual</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#contacto" class="cta">Contacto</a>
       </nav>
@@ -388,6 +416,19 @@
       </div>
     </section>
 
+    <!-- ===== AUDIOVISUAL ===== -->
+    <section id="audiovisual" class="av">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="label">02 — Audiovisual</span>
+            <h2>Audiovisual</h2>
+          </div>
+        </div>
+        <div class="av-grid" id="av-grid"></div>
+      </div>
+    </section>
+
     <!-- ===== SOBRE MÍ ===== -->
     <section id="sobre-mi" class="about">
       <div class="container about-grid">
@@ -400,7 +441,7 @@
         </div>
         </div>
         <div>
-          <span class="label">02 — Sobre mí</span>
+          <span class="label">03 — Sobre mí</span>
           <h2>Sobre mí</h2>
           <p class="bio">[Escríbelo como se lo contarías a alguien en persona: cómo llegaste al diseño, qué es lo que más disfrutas hacer y qué estás buscando ahora.]</p>
           <div class="lists">
@@ -447,7 +488,7 @@
         <i class="cross" style="left:28px;top:28px"></i><i class="cross" style="right:28px;top:28px"></i>
       </div>
       <div class="container">
-        <span class="label">03 — Contacto</span>
+        <span class="label">04 — Contacto</span>
         <h2>Escríbeme.</h2>
         <a class="btn" href="mailto:hola@tunombre.com">hola@tunombre.com <span aria-hidden="true">→</span></a>
         <div class="socials">
@@ -552,16 +593,6 @@
         ancho: true
       },
       {
-        titulo: "Reel audiovisual",
-        categoria: "Audiovisual",
-        año: 2024,
-        cliente: "Universidad",
-        rol: "Dirección, edición",
-        descripcion: "Selección de trabajos audiovisuales.",
-        imagen: "", galeria: [], video: "",
-        color: "linear-gradient(135deg, #0f2a80, #05070d)"
-      },
-      {
         titulo: "Mesa de noche",
         categoria: "Producto",
         año: 2023,
@@ -649,6 +680,52 @@
       if (e.key === "ArrowRight") open(current + 1);
       if (e.key === "ArrowLeft") open(current - 1);
     });
+
+    /* =====================================================
+       TUS VIDEOS — pega el link de YouTube o Vimeo.
+       El primero sale grande (destacado).
+       ===================================================== */
+    const videos = [
+      {
+        titulo: "Título del video",
+        tipo: "Cortometraje",
+        año: 2024,
+        descripcion: "De qué se trata y qué hiciste tú (guion, dirección, cámara, edición...).",
+        url: "https://youtu.be/bpea2HG3o_g"
+      },
+      {
+        titulo: "Título del video",
+        tipo: "Video",
+        año: 2024,
+        descripcion: "De qué se trata y qué hiciste tú.",
+        url: "https://youtu.be/vk-TcWrIGLk"
+      }
+    ];
+
+    const ytId = url => (url.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/) || [])[1];
+    $("av-grid").innerHTML = videos.map((v, i) => {
+      const id = ytId(v.url);
+      const thumb = v.portada || (id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : "");
+      return `
+      <div class="av-item${i === 0 ? " featured" : ""}">
+        <div class="player" data-src="${embed(v.url)}" role="button" tabindex="0" aria-label="Reproducir ${v.titulo}">
+          ${thumb ? `<img src="${thumb}" alt="" loading="lazy" onerror="this.remove()" />` : ""}<span class="play"></span>
+        </div>
+        <div class="av-meta">
+          <span class="num">${String(i + 1).padStart(2, "0")}</span>
+          <h3>${v.titulo}</h3>
+          <span class="tag">${v.tipo} · ${v.año}</span>
+        </div>
+        <p class="av-desc">${v.descripcion}</p>
+      </div>`;
+    }).join("");
+    const play = el => {
+      if (el.querySelector("iframe")) return;
+      const sep = el.dataset.src.includes("?") ? "&" : "?";
+      el.innerHTML = `<iframe src="${el.dataset.src}${sep}autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    };
+    $("av-grid").addEventListener("click", e => { const p = e.target.closest(".player"); if (p) play(p); });
+    $("av-grid").addEventListener("keydown", e => { const p = e.target.closest(".player"); if (p && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); play(p); } });
 
     // Header al hacer scroll
     const header = $("header");
