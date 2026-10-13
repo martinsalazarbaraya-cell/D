@@ -157,6 +157,7 @@
     .card.half .thumb { aspect-ratio: 3 / 2; }
     .card.feat .thumb .cover-text { font-size: clamp(48px, 7vw, 112px); }
     .card.third .thumb .cover-text, .card.half .thumb .cover-text { font-size: clamp(32px, 4vw, 64px); }
+    .m-cifra { margin: 18px 0 0; padding-left: 14px; border-left: 2px solid var(--blue); font-family: var(--display); font-size: 18px; color: var(--text); }
     .grid-label.first { margin-top: 0; }
     .grid.filtered .grid-label { display: none; }
     .grid-label { grid-column: span 12; margin: 40px 0 -8px; font: 400 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
@@ -601,6 +602,7 @@
         año: 2025,
         cliente: "Marini Star",
         rol: "Diseño de ropa, contenido para redes y fotografía",
+        cifra: "+3.000 seguidores en un año manejando la cuenta",
         descripcion: "Trabajo para Marini Star, marca de ropa masculina. Diseñé estampados para camisetas, hice piezas para redes y fotografié la sesión de producto.",
         imagen: "assets/marini/portada.jpg",
         textoPortada: "Marini Star",
@@ -793,7 +795,7 @@
         <div><span class="label">Cliente</span><p>${p.cliente}</p></div>
         <div><span class="label">Rol</span><p>${p.rol}</p></div>
         ${p.año ? `<div><span class="label">Año</span><p>${p.año}</p></div>` : ""}
-        <div${p.año ? "" : ' class="wide-desc"'}><span class="label">Sobre el proyecto</span><p class="m-desc">${p.descripcion}</p>${p.enlace ? `<a class="pill primary m-link" href="${p.enlace}" target="_blank" rel="noopener">${p.enlaceTexto || "Ver proyecto"} ↗</a>` : ""}</div>`;
+        <div${p.año ? "" : ' class="wide-desc"'}><span class="label">Sobre el proyecto</span><p class="m-desc">${p.descripcion}</p>${p.cifra ? `<p class="m-cifra">${p.cifra}</p>` : ""}${p.enlace ? `<a class="pill primary m-link" href="${p.enlace}" target="_blank" rel="noopener">${p.enlaceTexto || "Ver proyecto"} ↗</a>` : ""}</div>`;
       const video = p.video ? `<div class="video"><iframe src="${embed(p.video)}" title="${p.titulo}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : "";
       const imgs = p.galeria.length ? p.galeria : (p.video ? [] : [p.imagen]);
       $("m-gallery").style.gridTemplateColumns = p.columnas && innerWidth > 640 ? `repeat(${p.columnas}, 1fr)` : "";
