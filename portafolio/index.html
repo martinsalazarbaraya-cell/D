@@ -240,6 +240,7 @@
     .gallery { display: grid; gap: 20px; padding-bottom: 96px; }
     .gallery img, .gallery .ph, .gallery .video { width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
     .gallery .ph { aspect-ratio: 16 / 9; }
+    .gallery.grid-mode img { aspect-ratio: 4 / 5; object-fit: cover; }
     .gallery .video { aspect-ratio: 16 / 9; overflow: hidden; background: #000; }
     .gallery iframe { width: 100%; height: 100%; border: 0; }
 
@@ -547,13 +548,18 @@
         categoria: "Patrones & Ilustración",
         año: 2025,
         cliente: "Universidad de los Andes",
-        rol: "Diseño de patrones y aplicación",
-        descripcion: "Serie de patrones tropicales y geométricos aplicados en vestidos de baño y libretas. [Cuenta en una o dos líneas el encargo o la idea detrás de la colección.]",
+        rol: "Diseño de patrones, color y mockups",
+        descripcion: "Tres colecciones de patrones para ropa de playa: Psicotrópico, Isla Madre y Esencia Tropical. Cada una tiene un patrón principal, variaciones de color y un coordinado, aplicados en vestidos de baño, pantalonetas y libretas. [Cuenta en una o dos líneas el encargo o la idea detrás de las colecciones.]",
         imagen: "assets/patrones/portada.jpg",
         galeria: [
           "assets/patrones/vestido-morado.jpg", "assets/patrones/vestido-blanco.jpg", "assets/patrones/vestido-verde.jpg",
-          "assets/patrones/vestido-blanco-perfil.jpg", "assets/patrones/libreta-felinos.jpg", "assets/patrones/libreta-frutas.jpg",
-          "assets/patrones/esencia-tropical-1.jpg", "assets/patrones/esencia-tropical-2.jpg", "assets/patrones/isla-madre.jpg"
+          "assets/patrones/pantaloneta-rosa.jpg", "assets/patrones/pantaloneta-azul.jpg",
+          "assets/patrones/pantaloneta-escalera.jpg", "assets/patrones/libreta-felinos.jpg", "assets/patrones/libreta-frutas.jpg",
+          "assets/patrones/psicotropico-felinos-negro.jpg", "assets/patrones/psicotropico-felinos-morado.jpg", "assets/patrones/psicotropico-hojas.jpg",
+          "assets/patrones/isla-madre-caballito-azul.jpg", "assets/patrones/isla-madre-caballito-rojo.jpg", "assets/patrones/psicotropico-marmol.jpg",
+          "assets/patrones/isla-madre-conchas-azul.jpg", "assets/patrones/isla-madre-conchas-naranja.jpg", "assets/patrones/isla-madre-rombos-azul.jpg",
+          "assets/patrones/esencia-tropical-verano-claro.jpg", "assets/patrones/esencia-tropical-verano-oscuro.jpg",
+          "assets/patrones/esencia-tropical-1.jpg", "assets/patrones/esencia-tropical-2.jpg"
         ],
         columnas: 3,
         video: "",
@@ -672,6 +678,7 @@
       const video = p.video ? `<div class="video"><iframe src="${embed(p.video)}" title="${p.titulo}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : "";
       const imgs = p.galeria.length ? p.galeria : (p.video ? [] : [p.imagen]);
       $("m-gallery").style.gridTemplateColumns = p.columnas && innerWidth > 640 ? `repeat(${p.columnas}, 1fr)` : "";
+      $("m-gallery").classList.toggle("grid-mode", !!p.columnas);
       $("m-gallery").innerHTML = video + imgs.map(src => visual(src, p.color, initials(p.titulo), p.titulo)).join("");
       if (!modal.open) { modal.showModal(); document.body.style.overflow = "hidden"; }
       modal.scrollTop = 0;
