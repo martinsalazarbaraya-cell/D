@@ -249,6 +249,7 @@
     .m-sec { display: grid; gap: 16px; margin-bottom: 56px; }
     .m-sec h4 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 28px; letter-spacing: -0.02em; }
     .m-sec p { margin: 0; color: var(--muted); max-width: 640px; }
+    @media (max-width: 640px) { .m-sec .gallery { grid-template-columns: 1fr 1fr !important; } }
     .gallery.contain img { object-fit: contain; background: var(--surface); }
     .vid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .vid-grid:has(> :only-child) { grid-template-columns: 1fr; }
@@ -613,6 +614,7 @@
         textoPortada: "ASC",
         secciones: [
           { titulo: "Posts y piezas de campaña", texto: "Piezas para eventos y convocatorias: retiros, temporadas de campos de verano y eventos de recaudación con aliados como Cyglo.", imagenes: ["assets/asc/post-1.jpg", "assets/asc/post-2.jpg", "assets/asc/post-3.jpg", "assets/asc/post-4.jpg"], columnas: 4, ajuste: "contain" },
+          { titulo: "Carrusel: el camino del dirigente EKO", texto: "Carrusel que explica el rol de los dirigentes de los campos de verano EKO, paso a paso, y cierra con una invitación a donar.", imagenes: ["assets/asc/eko-1.jpg", "assets/asc/eko-2.jpg", "assets/asc/eko-3.jpg", "assets/asc/eko-4.jpg", "assets/asc/eko-5.jpg"], columnas: 5 },
           { titulo: "Carrusel: perfil de Juan Carlos", texto: "Carrusel que cuenta el origen de la asociación a través de su fundador.", imagenes: ["assets/asc/perfil-jc-1.jpg", "assets/asc/perfil-jc-2.jpg", "assets/asc/perfil-jc-3.jpg", "assets/asc/perfil-jc-4.jpg"], columnas: 4 },
           { titulo: "Carrusel: perfil de Monseñor", texto: "", imagenes: ["assets/asc/perfil-monsenor-1.jpg", "assets/asc/perfil-monsenor-2.jpg"], columnas: 4 },
           { titulo: "Historias", texto: "", imagenes: ["assets/asc/story-juandi.jpg", "assets/asc/story-misa.jpg"], columnas: 4 }
