@@ -647,21 +647,16 @@
         categoria: "Patrones",
         año: 2025,
         cliente: "Universidad de los Andes · DISO-3421 Creación",
-        rol: "Diseño de patrones, color y mockups",
+        rol: "Dibujo, diseño de patrones, color y mockups",
         descripcion: "Tres colecciones de patrones para ropa de playa: Psicotrópico, Isla Madre y Esencia Tropical. Cada colección tiene un patrón principal, variaciones de color y un coordinado, aplicados en vestidos de baño, pantalonetas y libretas.",
         imagen: "assets/patrones/portada-patron.jpg",
         textoPortada: "Patrones",
-        galeria: [
-          "assets/patrones/vestido-morado.jpg", "assets/patrones/vestido-blanco.jpg", "assets/patrones/vestido-verde.jpg",
-          "assets/patrones/pantaloneta-rosa.jpg", "assets/patrones/pantaloneta-azul.jpg",
-          "assets/patrones/pantaloneta-escalera.jpg", "assets/patrones/libreta-felinos.jpg", "assets/patrones/libreta-frutas.jpg",
-          "assets/patrones/psicotropico-felinos-negro.jpg", "assets/patrones/psicotropico-felinos-morado.jpg", "assets/patrones/psicotropico-hojas.jpg",
-          "assets/patrones/isla-madre-caballito-azul.jpg", "assets/patrones/isla-madre-caballito-rojo.jpg", "assets/patrones/psicotropico-marmol.jpg",
-          "assets/patrones/isla-madre-conchas-azul.jpg", "assets/patrones/isla-madre-conchas-naranja.jpg", "assets/patrones/isla-madre-rombos-azul.jpg",
-          "assets/patrones/esencia-tropical-verano-claro.jpg", "assets/patrones/esencia-tropical-verano-oscuro.jpg",
-          "assets/patrones/esencia-tropical-1.jpg", "assets/patrones/esencia-tropical-2.jpg"
+        secciones: [
+          { titulo: "Proceso: dibujo botánico", texto: "Todo empezó a mano: flores y hojas dibujadas con lápiz de color sobre papel kraft, observando las formas antes de llevarlas a patrón.", imagenes: ["assets/ilustracion/lirio.jpg", "assets/ilustracion/flor-roja.jpg", "assets/ilustracion/ramo-flor-blanca.jpg", "assets/ilustracion/dalia.jpg", "assets/ilustracion/girasol.jpg", "assets/ilustracion/enredadera.jpg"], columnas: 3 },
+          { titulo: "Colecciones", texto: "Psicotrópico, Isla Madre y Esencia Tropical: patrón principal, variaciones de color y coordinados.", imagenes: ["assets/patrones/psicotropico-felinos-negro.jpg", "assets/patrones/psicotropico-felinos-morado.jpg", "assets/patrones/psicotropico-hojas.jpg", "assets/patrones/isla-madre-caballito-azul.jpg", "assets/patrones/isla-madre-caballito-rojo.jpg", "assets/patrones/psicotropico-marmol.jpg", "assets/patrones/isla-madre-conchas-azul.jpg", "assets/patrones/isla-madre-conchas-naranja.jpg", "assets/patrones/isla-madre-rombos-azul.jpg", "assets/patrones/esencia-tropical-verano-claro.jpg", "assets/patrones/esencia-tropical-verano-oscuro.jpg", "assets/patrones/esencia-tropical-1.jpg"], columnas: 3 },
+          { titulo: "Aplicaciones", texto: "Los patrones aplicados en vestidos de baño, pantalonetas y libretas.", imagenes: ["assets/patrones/vestido-morado.jpg", "assets/patrones/vestido-blanco.jpg", "assets/patrones/vestido-verde.jpg", "assets/patrones/pantaloneta-rosa.jpg", "assets/patrones/pantaloneta-azul.jpg", "assets/patrones/pantaloneta-escalera.jpg", "assets/patrones/libreta-felinos.jpg", "assets/patrones/libreta-frutas.jpg", "assets/patrones/esencia-tropical-2.jpg"], columnas: 3 }
         ],
-        columnas: 3,
+        galeria: [],
         video: "",
         color: "linear-gradient(135deg, #3d7bff, #142a66)",
         ancho: true
@@ -680,24 +675,6 @@
         enlaceTexto: "Escuchar en SoundCloud",
         video: "",
         color: "#d00013",
-        ancho: true
-      },
-      {
-        titulo: "Ilustración botánica",
-        categoria: "Ilustración y dibujo",
-        año: 2025,
-        cliente: "Universidad de los Andes · DISO-3421 Creación",
-        rol: "Dibujo a lápiz de color",
-        descripcion: "Serie de flores y hojas dibujadas a mano con lápiz de color sobre papel kraft, como ejercicio de observación y dibujo botánico en la misma clase donde desarrollé las colecciones de patrones.",
-        imagen: "assets/ilustracion/portada.jpg",
-        textoPortada: "Ilustración",
-        galeria: [
-          "assets/ilustracion/lirio.jpg", "assets/ilustracion/flor-roja.jpg", "assets/ilustracion/ramo-flor-blanca.jpg",
-          "assets/ilustracion/dalia.jpg", "assets/ilustracion/girasol.jpg", "assets/ilustracion/enredadera.jpg"
-        ],
-        columnas: 3,
-        video: "",
-        color: "linear-gradient(135deg, #c9b99a, #6f6450)",
         ancho: true
       },
       {
@@ -760,7 +737,7 @@
 
     // Tarjetas
     grid.innerHTML = proyectos.map((p, i) => `
-      ${i === 0 ? `<p class="grid-label first">Clientes</p>` : ""}${i === 2 ? `<p class="grid-label">Proyectos académicos y personales</p>` : ""}<button class="card ${i < 2 ? "feat" : i < 5 ? "third" : "half"}" data-cat="${p.categoria}" data-i="${i}">
+      ${i === 0 ? `<p class="grid-label first">Clientes</p>` : ""}${i === 2 ? `<p class="grid-label">Proyectos académicos y personales</p>` : ""}<button class="card ${i < 2 ? "feat" : "half"}" data-cat="${p.categoria}" data-i="${i}">
         <div class="thumb">${visual(p.imagen, p.color, initials(p.titulo), p.titulo)}${p.textoPortada ? `<span class="cover-text${p.textoAbajo ? " bottom" : ""}${p.textoBajoLogo ? " under-logo" : ""}${p.textoLargo ? " long" : ""}">${p.textoPortada}</span>` : ""}</div>
         <div class="card-meta">
           <span class="num">${String(i + 1).padStart(2, "0")}</span>
