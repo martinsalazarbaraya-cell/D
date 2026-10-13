@@ -150,6 +150,16 @@
     .card.wide { grid-column: span 12; }
     .card.wide .thumb { aspect-ratio: 21 / 9; }
     .card.hidden { display: none; }
+    .card.feat { grid-column: span 6; }
+    .card.feat .thumb { aspect-ratio: 4 / 5; }
+    .card.third { grid-column: span 4; }
+    .card.half { grid-column: span 6; }
+    .card.half .thumb { aspect-ratio: 3 / 2; }
+    .card.feat .thumb .cover-text { font-size: clamp(48px, 7vw, 112px); }
+    .card.third .thumb .cover-text, .card.half .thumb .cover-text { font-size: clamp(32px, 4vw, 64px); }
+    .grid-label.first { margin-top: 0; }
+    .grid.filtered .grid-label { display: none; }
+    .grid-label { grid-column: span 12; margin: 40px 0 -8px; font: 400 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
     .thumb {
       position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden;
       background: var(--surface); border: 1px solid var(--line);
@@ -350,7 +360,8 @@
 
     /* ---------- Responsive ---------- */
     @media (max-width: 900px) {
-      .card, .card.wide { grid-column: span 12; }
+      .card, .card.wide, .card.feat, .card.third, .card.half { grid-column: span 12; }
+      .card.feat .thumb { aspect-ratio: 4 / 3; }
       .card.wide .thumb { aspect-ratio: 4 / 3; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .portrait { max-width: 380px; }
@@ -745,7 +756,7 @@
 
     // Tarjetas
     grid.innerHTML = proyectos.map((p, i) => `
-      <button class="card${p.ancho ? " wide" : ""}" data-cat="${p.categoria}" data-i="${i}">
+      ${i === 0 ? `<p class="grid-label first">Clientes</p>` : ""}${i === 2 ? `<p class="grid-label">Proyectos académicos y personales</p>` : ""}<button class="card ${i < 2 ? "feat" : i < 5 ? "third" : "half"}" data-cat="${p.categoria}" data-i="${i}">
         <div class="thumb">${visual(p.imagen, p.color, initials(p.titulo), p.titulo)}${p.textoPortada ? `<span class="cover-text${p.textoAbajo ? " bottom" : ""}${p.textoBajoLogo ? " under-logo" : ""}${p.textoLargo ? " long" : ""}">${p.textoPortada}</span>` : ""}</div>
         <div class="card-meta">
           <span class="num">${String(i + 1).padStart(2, "0")}</span>
@@ -767,6 +778,7 @@
       const btn = e.target.closest("button");
       if (!btn) return;
       filters.querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
+      grid.classList.toggle("filtered", btn.dataset.cat !== "Todo");
       grid.querySelectorAll(".card").forEach(card =>
         card.classList.toggle("hidden", btn.dataset.cat !== "Todo" && card.dataset.cat !== btn.dataset.cat));
     });
