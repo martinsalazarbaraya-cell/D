@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Martín Salazar Baraya — Narrador digital y diseñador</title>
+  <meta name="description" content="Portafolio de diseño gráfico, contenido para marcas, ilustración y fotografía." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #05070d;
+      --bg-2: #0a0f1c;
+      --surface: #0e1424;
+      --line: rgba(140, 170, 255, 0.12);
+      --line-strong: rgba(140, 170, 255, 0.28);
+      --text: #eef2ff;
+      --muted: #8a93ab;
+      --blue: #3d7bff;
+      --blue-soft: #7aa5ff;
+      --display: "Bricolage Grotesque", "Inter", Arial, sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Inter", Arial, Helvetica, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+      --radius: 14px;
+      --ease: cubic-bezier(.2, .7, .2, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    ::selection { background: var(--blue); color: #fff; }
+
+    .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+    .label {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--blue-soft);
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      position: fixed; inset: 0 0 auto 0; z-index: 30;
+      transition: background .3s, border-color .3s;
+      border-bottom: 1px solid transparent;
+    }
+    header.scrolled {
+      background: rgba(5, 7, 13, .75);
+      backdrop-filter: blur(14px);
+      border-color: var(--line);
+    }
+    header .container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo {
+      font-family: var(--display); font-weight: 600; font-size: 18px;
+      text-decoration: none; display: flex; align-items: center; gap: 10px;
+    }
+    .logo i { width: 10px; height: 10px; background: var(--blue); border-radius: 2px; box-shadow: 0 0 16px var(--blue); }
+    nav { display: flex; align-items: center; gap: 32px; }
+    nav a { text-decoration: none; font-size: 14px; color: var(--muted); transition: color .2s; }
+    nav a:hover, nav a.active { color: var(--text); }
+    nav .cta {
+      color: var(--text); border: 1px solid var(--line-strong);
+      padding: 8px 16px; border-radius: 999px; transition: background .2s, border-color .2s;
+    }
+    nav .cta:hover { background: var(--blue); border-color: var(--blue); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; min-height: 100vh; min-height: 100svh;
+      display: flex; align-items: flex-end; padding: 140px 0 72px;
+      overflow: hidden;
+    }
+    .hero::before { /* retícula */
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 20%, transparent 75%);
+    }
+    .glow {
+      position: absolute; width: 900px; height: 900px; right: -250px; top: -300px;
+      background: radial-gradient(circle, rgba(61,123,255,.35), rgba(61,123,255,0) 60%);
+      filter: blur(20px); pointer-events: none;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { to { transform: translate(-80px, 60px) scale(1.08); } }
+    .hero .container { position: relative; }
+    .hero h1 {
+      font-family: var(--display); font-weight: 500;
+      font-size: clamp(44px, 8.4vw, 132px);
+      line-height: .95; letter-spacing: -0.035em; margin: 24px 0 40px;
+    }
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--blue-soft), var(--blue));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-bottom {
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap;
+      border-top: 1px solid var(--line); padding-top: 28px;
+    }
+    .hero-bottom p { max-width: 480px; margin: 0; color: var(--muted); font-size: 17px; }
+    .status { display: inline-flex; align-items: center; gap: 10px; }
+    .status::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%; background: #35d07f;
+      box-shadow: 0 0 0 4px rgba(53,208,127,.15);
+    }
+
+    /* ---------- Secciones ---------- */
+    section { padding: 120px 0; position: relative; }
+    .section-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 24px; flex-wrap: wrap; margin-bottom: 56px;
+    }
+    h2 {
+      font-family: var(--display); font-weight: 500; letter-spacing: -0.03em;
+      font-size: clamp(36px, 5vw, 64px); line-height: 1; margin: 14px 0 0;
+    }
+
+    /* Filtros */
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filters button {
+      font: 400 13px var(--mono); letter-spacing: .04em; cursor: pointer;
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px;
+      transition: all .2s;
+    }
+    .filters button:hover { color: var(--text); border-color: var(--line-strong); }
+    .filters button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    /* Proyectos */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 28px; }
+    .card {
+      grid-column: span 6; cursor: pointer; text-align: left; font: inherit; color: inherit;
+      background: none; border: 0; padding: 0;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .8s var(--ease), transform .8s var(--ease);
+    }
+    .card.in { opacity: 1; transform: none; }
+    .card.wide { grid-column: span 12; }
+    .card.wide .thumb { aspect-ratio: 21 / 9; }
+    .card.hidden { display: none; }
+    .card.feat { grid-column: span 6; }
+    .card.feat .thumb { aspect-ratio: 4 / 5; }
+    .card.third { grid-column: span 4; }
+    .card.half { grid-column: span 6; }
+    .card.half .thumb { aspect-ratio: 3 / 2; }
+    .card.feat .thumb .cover-text { font-size: clamp(48px, 7vw, 112px); }
+    .card.third .thumb .cover-text, .card.half .thumb .cover-text { font-size: clamp(32px, 4vw, 64px); }
+    .m-meta p.m-cifra, p.m-cifra { margin: 20px 0 0 !important; padding-left: 14px; border-left: 2px solid var(--blue); font-family: var(--display); font-size: 18px; color: var(--text); }
+    .hero-lede { max-width: 40ch; margin: 28px 0 40px; font-family: var(--display); font-size: clamp(19px, 2.2vw, 26px); line-height: 1.4; color: var(--muted); text-wrap: balance; }
+    .grid-label.first { margin-top: 0; }
+    .grid.filtered .grid-label { display: none; }
+    .grid-label { grid-column: span 12; margin: 40px 0 -8px; font: 400 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .thumb {
+      position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden;
+      background: var(--surface); border: 1px solid var(--line);
+    }
+    .thumb img, .thumb .ph { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
+    .card:hover .thumb img, .card:hover .thumb .ph { transform: scale(1.045); }
+    .thumb::after {
+      content: "Ver proyecto →"; position: absolute; left: 20px; bottom: 20px;
+      font: 400 12px var(--mono); letter-spacing: .08em; text-transform: uppercase;
+      background: rgba(5,7,13,.7); backdrop-filter: blur(8px);
+      border: 1px solid var(--line-strong); border-radius: 999px; padding: 8px 14px;
+      opacity: 0; transform: translateY(8px); transition: all .4s var(--ease);
+    }
+    .card:hover .thumb::after, .card:focus-visible .thumb::after { opacity: 1; transform: none; }
+    .thumb .cover-text {
+      position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
+      background: linear-gradient(180deg, rgba(5,7,13,.25), rgba(5,7,13,.6));
+      font-family: var(--display); font-weight: 600; letter-spacing: -0.04em; color: #fff;
+      font-size: clamp(56px, 11vw, 168px); text-shadow: 0 6px 40px rgba(0,0,0,.5);
+    }
+    .thumb .cover-text.bottom { place-items: end start; padding: 0 0 28px 36px; background: linear-gradient(180deg, rgba(5,7,13,0) 45%, rgba(5,7,13,.65)); }
+    .thumb .cover-text.under-logo { place-items: center; transform: translateY(24%); background: none; font-size: clamp(28px, 4.6vw, 64px); letter-spacing: -0.02em; }
+    .thumb .cover-text.long { font-size: clamp(36px, 7.4vw, 112px); text-align: center; white-space: nowrap; }
+    .card.wide .thumb img { object-fit: cover; }
+    .ph {
+      display: grid; place-items: center;
+      font-family: var(--display); font-weight: 500; font-size: clamp(48px, 7vw, 96px);
+      color: rgba(255,255,255,.85); letter-spacing: -0.04em;
+    }
+    .card-meta { display: flex; align-items: baseline; gap: 16px; margin-top: 18px; }
+    .card-meta .num { font: 400 12px var(--mono); color: var(--blue-soft); }
+    .card h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 22px; letter-spacing: -0.01em; flex: 1; }
+    .card-meta .tag { font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+    /* ---------- Sobre mí ---------- */
+    .about { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: start; }
+    .portrait { aspect-ratio: 4 / 5; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; }
+    .portrait .ph { height: 100%; background: linear-gradient(160deg, #1b2a52, #0b1020 70%); }
+    .bio { font-family: var(--display); font-size: clamp(22px, 2.4vw, 30px); line-height: 1.35; letter-spacing: -0.01em; margin: 28px 0 56px; font-weight: 400; }
+    .bio em { font-style: normal; color: var(--blue-soft); }
+    .lists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .lists .label { display: block; margin-bottom: 14px; }
+    .lists ul { list-style: none; margin: 0; padding: 0; }
+    .lists li { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+
+    /* ---------- Contacto ---------- */
+    .contact { padding: 160px 0 120px; text-align: center; overflow: hidden; }
+    .contact .glow { right: auto; left: 50%; top: auto; bottom: -600px; transform: translateX(-50%); animation: none; }
+    .contact h2 { font-size: clamp(44px, 8vw, 120px); margin: 18px 0 40px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 12px; text-decoration: none;
+      font-family: var(--display); font-weight: 500; font-size: clamp(18px, 2.4vw, 26px);
+      background: var(--blue); color: #fff; padding: 18px 32px; border-radius: 999px;
+      box-shadow: 0 10px 40px -10px var(--blue); transition: transform .3s var(--ease), box-shadow .3s;
+      word-break: break-all; position: relative;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 18px 50px -10px var(--blue); }
+    .socials { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 48px; position: relative; }
+    .socials a {
+      text-decoration: none; font: 400 13px var(--mono); letter-spacing: .06em; text-transform: uppercase;
+      color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; transition: all .2s;
+    }
+    .socials a:hover { color: var(--text); border-color: var(--line-strong); }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0; font: 400 12px var(--mono); color: var(--muted); letter-spacing: .04em; }
+    footer .container { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* ---------- Detalle de proyecto ---------- */
+    dialog {
+      width: 100%; max-width: 100%; height: 100%; max-height: 100%; margin: 0;
+      border: 0; padding: 0; background: var(--bg); color: var(--text);
+    }
+    dialog[open] { animation: rise .5s var(--ease); }
+    @keyframes rise { from { opacity: 0; transform: translateY(30px); } }
+    dialog::backdrop { background: rgba(0,0,0,.8); }
+    .m-bar {
+      position: sticky; top: 0; z-index: 2;
+      background: rgba(5,7,13,.8); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+    }
+    .m-bar .container { display: flex; justify-content: space-between; align-items: center; height: 64px; gap: 12px; }
+    .m-bar button {
+      font: 400 13px var(--mono); letter-spacing: .04em; cursor: pointer;
+      background: none; color: var(--text); border: 1px solid var(--line-strong);
+      border-radius: 999px; padding: 8px 16px; transition: all .2s;
+    }
+    .m-bar button:hover { background: var(--text); color: var(--bg); }
+    .m-nav { display: flex; gap: 8px; }
+    .m-head { padding: 72px 0 48px; }
+    .m-head h3 { font-family: var(--display); font-weight: 500; letter-spacing: -0.03em; font-size: clamp(40px, 7vw, 96px); line-height: 1; margin: 16px 0 40px; }
+    .m-info { display: grid; grid-template-columns: repeat(3, 1fr) 2fr; gap: 32px; border-top: 1px solid var(--line); padding-top: 28px; }
+    .m-info .label { display: block; margin-bottom: 6px; color: var(--muted); }
+    .m-info p { margin: 0; }
+    .m-sec { display: grid; gap: 16px; margin-bottom: 56px; }
+    .m-sec h4 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 28px; letter-spacing: -0.02em; }
+    .m-sec p { margin: 0; color: var(--muted); max-width: 640px; }
+    @media (max-width: 640px) { .m-sec .gallery { grid-template-columns: 1fr 1fr !important; } }
+    .gallery.contain img { object-fit: contain; background: var(--surface); }
+    .vid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .vid-grid:has(> :only-child) { grid-template-columns: 1fr; }
+    .vid-grid.vertical { grid-template-columns: repeat(4, 1fr); }
+    .vid-grid.vertical .player { aspect-ratio: 9 / 16; }
+    .vid-grid .player { background: radial-gradient(circle at 50% 40%, #1b2a52, #070b16); }
+    .vid-link { display: block; }
+    .vid-link img { width: 100%; height: 100%; object-fit: cover; }
+    .vid-ph { position: absolute; inset: 0; display: grid; place-items: end start; padding: 20px; font-family: var(--display); font-size: 22px; color: var(--text); }
+    .vid-yt { position: absolute; right: 14px; top: 14px; font: 400 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #fff; background: rgba(5,7,13,.6); border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 10px; opacity: 0; transition: opacity .3s; }
+    .vid-link:hover .vid-yt { opacity: 1; }
+    .vid-t { margin: 10px 0 0; color: var(--text); font-size: 15px; }
+    @media (max-width: 640px) { .vid-grid { grid-template-columns: 1fr; } .vid-grid.vertical { grid-template-columns: 1fr 1fr; } }
+    .m-link { margin-top: 20px; white-space: nowrap; }
+    @media (min-width: 901px) { .m-info .wide-desc { grid-column: 3 / 5; } }
+    .gallery.single img { max-width: 560px; margin: 0 auto; }
+    .m-desc { font-size: 17px; color: #c8cee0; }
+    .gallery { display: grid; gap: 20px; padding-bottom: 96px; }
+    .gallery img, .gallery .ph, .gallery .video { width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
+    .gallery .ph { aspect-ratio: 16 / 9; }
+    .gallery.grid-mode img { aspect-ratio: var(--r, 4 / 5); object-fit: cover; }
+    .gallery .video { aspect-ratio: 16 / 9; overflow: hidden; background: #000; }
+    .gallery iframe { width: 100%; height: 100%; border: 0; }
+
+
+
+    .soft { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: var(--blue-soft); }
+    h1 .soft { -webkit-text-fill-color: currentColor; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+      font-family: var(--display); font-weight: 500; font-size: 16px;
+      padding: 14px 24px; border-radius: 999px; border: 1px solid var(--line-strong);
+      transition: background .2s, border-color .2s, transform .3s var(--ease);
+    }
+    .pill:hover { transform: translateY(-2px); border-color: var(--text); }
+    .pill.primary { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 10px 30px -10px var(--blue); }
+
+
+    /* ---------- Audiovisual ---------- */
+    .av { background: var(--bg-2); border-top: 1px solid var(--line); }
+    .av-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .av-item.featured { grid-column: span 2; }
+    .player {
+      position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden;
+      background: #000; border: 1px solid var(--line); cursor: pointer;
+    }
+    .player img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: transform .9s var(--ease), opacity .3s; }
+    .player:hover img { transform: scale(1.03); opacity: 1; }
+    .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .play {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(5,7,13,.55); backdrop-filter: blur(8px); border: 1px solid var(--line-strong);
+      transition: background .3s, transform .3s var(--ease);
+    }
+    .play::before { content: ""; margin-left: 5px; border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent #fff; }
+    .player:hover .play { background: var(--blue); transform: translate(-50%, -50%) scale(1.08); }
+    .av-meta { display: flex; align-items: baseline; gap: 16px; margin-top: 18px; }
+    .av-meta .num { font: 400 12px var(--mono); color: var(--blue-soft); }
+    .av-meta h3 { margin: 0; flex: 1; font-family: var(--display); font-weight: 500; font-size: 22px; }
+    .av-meta .tag { font-size: 13px; color: var(--muted); white-space: nowrap; }
+    .av-desc { margin: 6px 0 0 34px; color: var(--muted); font-size: 15px; max-width: 640px; }
+    @media (max-width: 900px) { .av-grid { grid-template-columns: 1fr; } .av-item.featured { grid-column: auto; } }
+
+    /* ---------- Formas y figuras ---------- */
+    .shapes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .orbit {
+      position: absolute; right: -6vw; top: 8vh; width: min(62vw, 760px); aspect-ratio: 1;
+      color: var(--blue-soft);
+    }
+    .orbit svg { width: 100%; height: 100%; overflow: visible; }
+    .spin { transform-origin: 300px 300px; animation: spin 60s linear infinite; }
+    .spin.rev { animation-duration: 90s; animation-direction: reverse; }
+    .spin.fast { animation-duration: 24s; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .float { position: absolute; color: var(--blue-soft); animation: float 9s ease-in-out infinite alternate; }
+    .float.d2 { animation-delay: -3s; animation-duration: 11s; }
+    .float.d3 { animation-delay: -6s; animation-duration: 13s; }
+    @keyframes float { to { transform: translateY(-26px) rotate(25deg); } }
+    .cross { position: absolute; width: 14px; height: 14px; color: var(--line-strong); }
+    .cross::before, .cross::after { content: ""; position: absolute; background: currentColor; }
+    .cross::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+    .cross::after { top: 50%; left: 0; right: 0; height: 1px; }
+    .divider { display: flex; align-items: center; gap: 16px; color: var(--muted); }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; }
+    .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 40s linear infinite; }
+    .marquee span { font-family: var(--display); font-size: clamp(22px, 3vw, 36px); letter-spacing: -0.02em; color: var(--muted); display: flex; align-items: center; gap: 48px; white-space: nowrap; }
+    .marquee span::after { content: ""; width: 12px; height: 12px; border: 1px solid var(--blue); transform: rotate(45deg); }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+    .portrait-wrap { position: relative; }
+    .portrait-wrap .ring { position: absolute; width: 180px; height: 180px; right: -60px; bottom: -60px; color: var(--blue); z-index: 1; }
+    .portrait-wrap .dots { position: absolute; left: -28px; top: -28px; width: 120px; height: 120px; z-index: 0;
+      background-image: radial-gradient(var(--blue-soft) 1.2px, transparent 1.4px); background-size: 14px 14px; opacity: .35; }
+    .portrait { position: relative; z-index: 1; }
+    @media (max-width: 900px) { .orbit { opacity: .45; width: 90vw; right: -30vw; } .portrait-wrap .ring { right: -20px; width: 120px; height: 120px; } }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .card, .card.wide, .card.feat, .card.third, .card.half { grid-column: span 12; }
+      .card.feat .thumb { aspect-ratio: 4 / 3; }
+      .card.wide .thumb { aspect-ratio: 4 / 3; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .portrait { max-width: 380px; }
+      .m-info { grid-template-columns: 1fr 1fr; }
+      .m-info > div:last-child { grid-column: span 2; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 16px; }
+      nav { gap: 18px; }
+      nav a:not(.cta) { display: none; }
+      section { padding: 88px 0; }
+      .lists { grid-template-columns: 1fr; }
+      .card-meta { flex-wrap: wrap; gap: 4px 12px; }
+      .card-meta .tag { flex-basis: 100%; padding-left: 28px; }
+      .m-head { padding: 40px 0 32px; }
+      .m-nav button span { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .glow, .spin, .float, .marquee-track { animation: none; }
+      .card { opacity: 1; transform: none; transition: none; }
+      dialog[open] { animation: none; }
+    }
+
+    /* ================= Diseño sobrio ================= */
+    :root {
+      --bg: #08090c; --bg-2: #0c0e13; --surface: #12151c;
+      --line: rgba(220, 228, 245, 0.08); --line-strong: rgba(220, 228, 245, 0.18);
+      --text: #ece9e3; --muted: #8b909c;
+      --blue: #4a6fd1; --blue-soft: #8aa2e0;
+      --display: "Manrope", "Inter", Arial, sans-serif;
+      --sans: "Inter", Arial, sans-serif;
+      --mono: "Inter", Arial, sans-serif;
+      --radius: 6px;
+    }
+    .glow, .shapes, .marquee, .orbit, .float, .cross, .portrait-wrap .ring, .portrait-wrap .dots { display: none !important; }
+    .label { font-family: var(--sans); font-size: 12px; letter-spacing: .14em; color: var(--muted); }
+    header.scrolled { background: rgba(8,9,12,.9); }
+    .logo { font-weight: 500; font-size: 16px; letter-spacing: .01em; }
+    .logo i { width: 6px; height: 6px; border-radius: 50%; box-shadow: none; }
+    nav .cta { border: 0; padding: 0; color: var(--muted); }
+    nav .cta:hover { background: none; color: var(--text); }
+    .hero { min-height: auto; padding: 200px 0 40px; align-items: flex-start; }
+    #trabajo { padding-top: 56px; }
+    .hero::before { display: none; }
+    .hero h1 { font-family: var(--display); font-weight: 500; font-size: clamp(40px, 6vw, 84px); letter-spacing: -0.035em; line-height: 1.02; margin: 20px 0 48px; max-width: 14ch; }
+    .hero-bottom { border-top: 1px solid var(--line); padding-top: 32px; align-items: flex-start; }
+    .hero-bottom p { font-size: 16px; line-height: 1.7; max-width: 52ch; }
+    .hero-actions { gap: 32px; }
+    .hero-bottom { justify-content: flex-start; }
+    .text-link { text-decoration: none; font-size: 15px; color: var(--text); border-bottom: 1px solid var(--blue); padding-bottom: 3px; transition: color .2s; }
+    .text-link:hover { color: var(--blue-soft); }
+    section { padding: 96px 0; }
+    h2 { font-family: var(--display); font-weight: 500; letter-spacing: -0.03em; font-size: clamp(30px, 3.6vw, 44px); }
+    .filters button { font-family: var(--sans); font-size: 13px; letter-spacing: 0; border-color: transparent; padding: 6px 12px; }
+    .filters button.active { background: none; color: var(--text); border-color: var(--line-strong); }
+    .grid { gap: 56px 32px; }
+    .card { opacity: 1; transform: none; }
+    .thumb { border: 0; border-radius: var(--radius); }
+    .thumb::after { display: none; }
+    .card:hover .thumb img, .card:hover .thumb .ph { transform: scale(1.02); }
+    .thumb .cover-text { font-family: var(--display); font-weight: 500; letter-spacing: -0.035em; text-shadow: none; background: rgba(8,9,12,.32); }
+    .card-meta { margin-top: 16px; }
+    .card-meta .num { display: none; }
+    .card h3 { font-family: var(--sans); font-weight: 500; font-size: 16px; letter-spacing: 0; }
+    .card-meta .tag { font-size: 13px; }
+    .about { background: var(--bg); }
+    .portrait { border: 0; border-radius: var(--radius); }
+    .bio { font-family: var(--sans); font-size: 18px; line-height: 1.7; color: #c9c6c0; }
+    .lists li { font-size: 14px; color: #c9c6c0; }
+    .contact { text-align: left; padding: 120px 0; }
+    .contact h2 { font-size: clamp(30px, 3.6vw, 44px); margin: 14px 0 28px; }
+    .btn { background: none; box-shadow: none; padding: 0; color: var(--text); font-family: var(--display); font-weight: 500; font-size: clamp(22px, 3vw, 36px); border-bottom: 1px solid var(--blue); border-radius: 0; padding-bottom: 6px; }
+    .btn:hover { transform: none; box-shadow: none; color: var(--blue-soft); }
+    .socials { justify-content: flex-start; gap: 28px; }
+    .socials a { border: 0; padding: 0; font-family: var(--sans); text-transform: none; letter-spacing: 0; font-size: 14px; }
+    footer { font-family: var(--sans); letter-spacing: 0; }
+    .m-bar button { font-family: var(--sans); border-color: var(--line-strong); }
+    .m-head h3 { font-weight: 500; font-size: clamp(36px, 5vw, 64px); }
+    .gallery img, .gallery .ph, .gallery .video { border: 0; border-radius: var(--radius); }
+    .m-sec h4 { font-family: var(--display); font-weight: 500; font-size: 22px; }
+    .pill { border-radius: var(--radius); }
+    .pill.primary { box-shadow: none; }
+    .play { background: rgba(8,9,12,.55); }
+    .player:hover .play { background: var(--blue); }
+    .cv-btn { display: inline-flex; align-items: center; gap: 14px; margin-top: 40px; padding: 16px 22px; text-decoration: none; color: var(--text); border: 1px solid var(--line-strong); border-radius: var(--radius); font-family: var(--display); font-weight: 500; font-size: 17px; transition: border-color .2s, background .2s; }
+    .cv-btn small { font: 500 11px var(--sans); letter-spacing: .1em; color: var(--muted); }
+    .cv-btn b { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 500; }
+    .cv-btn:hover { border-color: var(--blue); background: rgba(74,111,209,.08); }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div class="container">
+      <a href="#" class="logo"><i></i>Martín Salazar</a>
+      <nav>
+        <a href="#trabajo">Trabajo</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto" class="cta">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="container">
+        <span class="label">Diseño gráfico · Marketing — Bogotá</span>
+        <h1>Martín Salazar Baraya</h1>
+        <p class="hero-lede">Diseño piezas gráficas y contenido para marcas y organizaciones. Hoy, practicante de comunicaciones en The Rockefeller Foundation.</p>
+        <div class="hero-bottom">
+          <div class="hero-actions">
+            <a class="text-link" href="#trabajo">Ver proyectos ↓</a>
+            <a class="text-link" href="#contacto">Contacto</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== TRABAJO ===== -->
+    <section id="trabajo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="label">01 — Trabajo seleccionado</span>
+            <h2>Proyectos</h2>
+          </div>
+          <div class="filters" id="filters"></div>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+
+    <!-- ===== SOBRE MÍ ===== -->
+    <section id="sobre-mi" class="about">
+      <div class="container about-grid">
+        <div class="portrait-wrap">
+        <div class="portrait">
+          <img src="assets/yo.jpg" alt="Martín Salazar Baraya" />
+        </div>
+        </div>
+        <div>
+          <span class="label">02 — Sobre mí</span>
+          <h2>Sobre mí</h2>
+          <p class="bio">Soy narrador digital y diseñador. Trabajo entre la comunicación visual y la producción audiovisual, y me gusta construir proyectos con identidad propia: desde el contenido de una marca hasta un podcast o un cortometraje. Estudio Narrativas Digitales y Diseño en la Universidad de los Andes. Además del diseño, llevo varios años liderando grupos de jóvenes, y eso me enseñó a coordinar equipos y a comunicar con claridad.</p>
+          <div class="lists">
+            <div>
+              <span class="label">Experiencia</span>
+              <ul>
+                <li>Practicante de comunicaciones, oficina para América Latina y el Caribe — The Rockefeller Foundation · 2026</li>
+                <li>Community manager y diseñador — Marini Star · 2025</li>
+                <li>Diseñador gráfico — Asociación Santa Cruz · 2024–25</li>
+              </ul>
+            </div>
+            <div>
+              <span class="label">Herramientas</span>
+              <ul>
+                <li>Illustrator · Photoshop · InDesign</li>
+                <li>Premiere · Lightroom</li>
+                <li>Procreate · Canva</li>
+                <li>Shopify · HTML & CSS</li>
+              </ul>
+            </div>
+            <div>
+              <span class="label">Educación e idiomas</span>
+              <ul>
+                <li>Narrativas Digitales y Diseño — Universidad de los Andes · 2021–presente</li>
+                <li>Español nativo</li>
+                <li>Inglés B2</li>
+                <li>Italiano básico</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTO ===== -->
+    <section id="contacto" class="contact">
+      <div class="container">
+        <span class="label">03 — Contacto</span>
+        <h2>Escríbeme.</h2>
+        <a class="btn" href="mailto:martinsalazarbaraya@gmail.com">martinsalazarbaraya@gmail.com <span aria-hidden="true">→</span></a>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/martin-salazar-baraya-625711310" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+        <a class="cv-btn" href="assets/Martin_Salazar_CV.pdf" target="_blank" rel="noopener"><span>Hoja de vida</span><small>PDF</small><b aria-hidden="true">↓</b></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© <span id="year"></span> Martín Salazar Baraya</span>
+      <a href="#">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <!-- Detalle de proyecto (pantalla completa) -->
+  <dialog id="modal" aria-labelledby="m-title">
+    <div class="m-bar">
+      <div class="container">
+        <button id="m-close">← Volver</button>
+        <div class="m-nav">
+          <button id="m-prev" aria-label="Proyecto anterior">↑ <span>Anterior</span></button>
+          <button id="m-next" aria-label="Proyecto siguiente"><span>Siguiente</span> ↓</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="m-head">
+        <span class="label" id="m-cat"></span>
+        <h3 id="m-title"></h3>
+        <div class="m-info" id="m-info"></div>
+      </div>
+      <div class="gallery" id="m-gallery"></div>
+    </div>
+  </dialog>
+
+  <script>
+    /* =====================================================
+       TUS PROYECTOS — edita solo esta lista.
+       - imagen:  portada (ej. "assets/asociacion/portada.jpg").
+                  Vacía = bloque de color.
+       - galeria: imágenes que se ven al abrir el proyecto.
+       - video:   link de YouTube o Vimeo (opcional).
+       - columnas: 2 o 3 = la galería se ve en cuadrícula
+                  (ideal para posts de Instagram).
+       - ancho:   true = la tarjeta ocupa todo el ancho (úsalo
+                  en 1 o 2 proyectos destacados).
+       ===================================================== */
+    const proyectos = [
+      {
+        titulo: "Marini Star",
+        categoria: "Redes y marketing",
+        año: 2025,
+        cliente: "Marini Star",
+        rol: "Diseño de ropa, contenido para redes y fotografía",
+        cifra: "De 11.000 a 14.000 seguidores en un año (+27 %)",
+        descripcion: "Trabajo para Marini Star, marca de ropa masculina. Diseñé estampados para camisetas, hice piezas para redes y fotografié la sesión de producto.",
+        imagen: "assets/marini/portada.jpg",
+        textoPortada: "Marini Star",
+        secciones: [
+          { titulo: "Diseño de ropa", texto: "Estampados para camisetas: Vespa Tour Club y una camiseta con bordados de estampillas inspiradas en Italia. Arriba el diseño, abajo la prenda terminada.", imagenes: ["assets/marini/vespa-blanco.jpg", "assets/marini/bordados.jpg", "assets/marini/prenda-vespa.jpg", "assets/marini/prenda-bordados.jpg"], columnas: 2 },
+          { titulo: "Posts y diseño gráfico", texto: "Piezas para Instagram: lanzamientos de producto, detalles de estampados y piezas de campaña.", imagenes: ["assets/marini/post-1.jpg", "assets/marini/post-2.jpg", "assets/marini/post-3.jpg", "assets/marini/post-9.jpg"], columnas: 4, ajuste: "contain" },
+          { titulo: "Carrusel: escoge tu estampado", texto: "Carrusel interactivo: cada línea de color lleva a un estampado de la colección.", imagenes: ["assets/marini/carrusel-2.jpg", "assets/marini/carrusel-3.jpg", "assets/marini/carrusel-4.jpg"] },
+          { titulo: "Carrusel: Prendas top", texto: "Carrusel editorial tipo collage sobre la prenda más vendida de la marca: la Pantapremium, para dentro y fuera del agua, en tres colores.", imagenes: ["assets/marini/top-1.jpg", "assets/marini/top-2.jpg", "assets/marini/top-3.jpg"] },
+          { titulo: "Carrusel: Pantapremium", texto: "Carrusel de producto: la prenda puesta, sus características y la prueba en el agua.", imagenes: ["assets/marini/panta-1.jpg", "assets/marini/panta-2.jpg", "assets/marini/panta-3.jpg"], columnas: 3 },
+          { titulo: "Fotografía", texto: "Fotos de la sesión de producto 2025.", imagenes: ["assets/marini/sesion-8.jpg", "assets/marini/sesion-1.jpg", "assets/marini/sesion-2.jpg", "assets/marini/sesion-3.jpg", "assets/marini/sesion-4.jpg", "assets/marini/sesion-5.jpg", "assets/marini/sesion-6.jpg", "assets/marini/sesion-7.jpg"], columnas: 4, ratio: "2 / 3" }
+        ],
+        galeria: [],
+        video: "",
+        color: "linear-gradient(135deg, #2a2f3d, #0d0f15)",
+        ancho: true
+      },
+      {
+        titulo: "Asociación Santa Cruz",
+        categoria: "Redes y marketing",
+        año: "2024–2025",
+        cliente: "Asociación Santa Cruz",
+        rol: "Diseñador gráfico",
+        cifra: "+50 piezas entre contenido para Instagram y comunicaciones internas",
+        descripcion: "Diseño de contenido para las redes de la Asociación Santa Cruz y sus campos de verano EKO: piezas para eventos, retiros y campañas de recaudación, y carruseles de convocatoria. Trabajé con una línea gráfica propia para cada programa, buscando comunicar con claridad y conectar con jóvenes y familias.",
+        imagen: "assets/asc/portada.jpg",
+        textoPortada: "ASC",
+        secciones: [
+          { titulo: "Posts y piezas de campaña", texto: "Piezas para eventos y convocatorias: retiros, temporadas de campos de verano y eventos de recaudación con aliados como Cyglo.", imagenes: ["assets/asc/post-1.jpg", "assets/asc/post-2.jpg", "assets/asc/post-4.jpg"], columnas: 3, ajuste: "contain" },
+          { titulo: "Carrusel: el camino del dirigente EKO", texto: "Carrusel que explica el rol de los dirigentes de los campos de verano EKO, paso a paso, y cierra con una invitación a donar.", imagenes: ["assets/asc/eko-1.jpg", "assets/asc/eko-2.jpg", "assets/asc/eko-3.jpg", "assets/asc/eko-4.jpg"], columnas: 4 },
+          { titulo: "Carrusel: ¿Alguna vez conociste a Dios?", texto: "Carrusel de convocatoria para los campos de verano EKO. Cada lámina muestra una experiencia distinta del campo.", imagenes: ["assets/asc/dios-1.jpg", "assets/asc/dios-2.jpg", "assets/asc/dios-3.jpg", "assets/asc/dios-4.jpg"], columnas: 4 },
+          { titulo: "Carrusel: Día de Todos los Santos", texto: "Carrusel para el 1 de noviembre: collage de santos recortados sobre el rojo institucional, con la idea de que la santidad es para todos.", imagenes: ["assets/asc/santos-1.jpg", "assets/asc/santos-2.jpg", "assets/asc/santos-3.jpg"], columnas: 3 },
+        ],
+        galeria: [],
+        video: "",
+        color: "linear-gradient(135deg, #1d3fa8, #0b1530)",
+        ancho: true
+      },
+      {
+        titulo: "Patrones",
+        categoria: "Patrones",
+        año: 2025,
+        cliente: "Universidad de los Andes · DISO-3421 Creación",
+        rol: "Dibujo, diseño de patrones, color y mockups",
+        descripcion: "Tres colecciones de patrones para ropa de playa: Psicotrópico, Isla Madre y Esencia Tropical. Cada colección tiene un patrón principal, variaciones de color y un coordinado, aplicados en vestidos de baño, pantalonetas y libretas.",
+        imagen: "assets/patrones/portada-patron.jpg",
+        textoPortada: "Patrones",
+        secciones: [
+          { titulo: "Proceso: dibujo botánico", texto: "Todo empezó a mano: flores y hojas dibujadas con lápiz de color sobre papel kraft, observando las formas antes de llevarlas a patrón.", imagenes: ["assets/ilustracion/lirio.jpg", "assets/ilustracion/flor-roja.jpg", "assets/ilustracion/ramo-flor-blanca.jpg", "assets/ilustracion/dalia.jpg", "assets/ilustracion/girasol.jpg", "assets/ilustracion/enredadera.jpg"], columnas: 3 },
+          { titulo: "Proceso: pruebas e intentos", texto: "Antes de llegar a las colecciones probé varios caminos: geometría, follaje en repetición, ilustración digital de las flores y composiciones más narrativas. Algunos se quedaron como intentos; otros alimentaron los patrones finales.", imagenes: ["assets/patrones/proceso-geometrico.jpg", "assets/patrones/proceso-palmas.jpg", "assets/patrones/proceso-lirio.jpg", "assets/patrones/proceso-serpiente.jpg", "assets/patrones/proceso-mantarrayas.jpg", "assets/patrones/proceso-corales.jpg"], columnas: 3, ratio: "1 / 1" },
+          { titulo: "Colecciones", texto: "Psicotrópico, Isla Madre y Esencia Tropical: patrón principal, variaciones de color y coordinados.", imagenes: ["assets/patrones/psicotropico-felinos-negro.jpg", "assets/patrones/psicotropico-felinos-morado.jpg", "assets/patrones/psicotropico-hojas.jpg", "assets/patrones/isla-madre-caballito-azul.jpg", "assets/patrones/isla-madre-caballito-rojo.jpg", "assets/patrones/psicotropico-marmol.jpg", "assets/patrones/isla-madre-conchas-azul.jpg", "assets/patrones/isla-madre-conchas-naranja.jpg", "assets/patrones/isla-madre-rombos-azul.jpg", "assets/patrones/esencia-tropical-verano-claro.jpg", "assets/patrones/esencia-tropical-verano-oscuro.jpg", "assets/patrones/esencia-tropical-1.jpg"], columnas: 3 },
+          { titulo: "Aplicaciones", texto: "Los patrones aplicados en vestidos de baño, pantalonetas y libretas.", imagenes: ["assets/patrones/mockup-isla-madre.jpg", "assets/patrones/vestido-morado.jpg", "assets/patrones/vestido-blanco.jpg", "assets/patrones/vestido-verde.jpg", "assets/patrones/pantaloneta-rosa.jpg", "assets/patrones/pantaloneta-azul.jpg", "assets/patrones/pantaloneta-escalera.jpg", "assets/patrones/libreta-felinos.jpg", "assets/patrones/libreta-frutas.jpg", "assets/patrones/esencia-tropical-2.jpg"], columnas: 5, ajuste: "contain" }
+        ],
+        galeria: [],
+        video: "",
+        color: "linear-gradient(135deg, #3d7bff, #142a66)",
+        ancho: true
+      },
+      {
+        titulo: "10 mm",
+        categoria: "Narrativa sonora",
+        año: 2024,
+        cliente: "Universidad de los Andes · Proyecto en equipo",
+        rol: "Ilustración de portada, actuación de voz y colaboración en edición",
+        descripcion: "Lo que están a punto de escuchar es el testimonio de Jorge Aristizábal, uno de los tantos jóvenes afectados por la situación del país en el año 89. Desde hace un tiempo se despierta todos los días con el insoportable sentimiento de que no debería estar vivo. Esto es 10 milímetros.<br><br>Hice la ilustración de portada, puse una de las voces y colaboré en la edición. Podcast de ficción realizado con Luna Robayo, Camila Moreno y María Paula Charry.",
+        imagen: "assets/podcast/portada.jpg",
+        textoPortada: "Sonoro",
+        galeria: ["assets/podcast/10mm.jpg"],
+        enlace: "https://on.soundcloud.com/4hZADXdUdouS2fK6GF",
+        enlaceTexto: "Escuchar en SoundCloud",
+        video: "",
+        color: "#d00013",
+        ancho: true
+      },
+      {
+        titulo: "Audiovisual",
+        categoria: "Audiovisual",
+        año: "2023–2024",
+        cliente: "Universidad de los Andes",
+        rol: "Guion y edición",
+        descripcion: "Dos proyectos audiovisuales de la universidad: un cortometraje de ficción y una serie de videos para un proyecto de materiales. En ambos estuve a cargo de la edición.",
+        imagen: "assets/audiovisual/portada.jpg",
+        textoPortada: "Audiovisual",
+        secciones: [
+          { titulo: "Ecos · 2023", texto: "Cortometraje de ficción sobre la pérdida y el duelo, realizado para el Taller Audiovisual de la Universidad de los Andes. Participé en la escritura del guion y estuve a cargo de la edición, construyendo el ritmo y los silencios que sostienen la historia. Realizado con Camila Moreno, Gregorio Camargo y María Paula Charry.", videos: [
+            { titulo: "Ecos", url: "https://youtu.be/bpea2HG3o_g", portada: "assets/audiovisual/ecos.jpg" }
+          ] },
+          { titulo: "Terranovae · 2024", texto: "Proyecto para el curso Pensamiento Material de la Universidad de los Andes. Estuve a cargo de la edición de los videos de presentación de los tres materiales desarrollados, entre ellos Galaxium, mostrando su proceso, su textura y su comportamiento. Realizado con Juan Diego Villamil y Sofía Páez.", videos: [
+            { titulo: "Terranovae", url: "https://youtu.be/vk-TcWrIGLk", portada: "assets/audiovisual/terranovae.jpg" }
+          ] }
+        ],
+        galeria: [],
+        video: "",
+        color: "#0b1020",
+        ancho: true
+      },
+      {
+        titulo: "Ciudades",
+        categoria: "Fotografía",
+        año: "2025–actualidad",
+        cliente: "Personal",
+        rol: "Fotografía",
+        descripcion: "Selección de fotos de arquitectura y ciudad tomadas en Madrid, Roma, Praga, Viena, París y Nueva York. Me interesan las fachadas, la luz al final del día y cómo se ve una ciudad desde arriba.",
+        imagen: "assets/fotografia/portada.jpg",
+        textoPortada: "Fotografía",
+        galeria: ["assets/fotografia/01.jpg", "assets/fotografia/02.jpg", "assets/fotografia/03.jpg", "assets/fotografia/04.jpg", "assets/fotografia/05.jpg", "assets/fotografia/06.jpg", "assets/fotografia/07.jpg", "assets/fotografia/08.jpg", "assets/fotografia/09.jpg", "assets/fotografia/10.jpg", "assets/fotografia/11.jpg", "assets/fotografia/12.jpg"],
+        columnas: 3,
+        video: "",
+        color: "linear-gradient(135deg, #8a93ab, #1a1f2c)",
+        ancho: true
+      }
+    ];
+
+    /* ---------- A partir de aquí no hace falta tocar nada ---------- */
+    const $ = id => document.getElementById(id);
+    const grid = $("grid"), filters = $("filters"), modal = $("modal");
+    let current = 0;
+
+    const visual = (src, color, label, alt) => src
+      ? `<img src="${src}" alt="${alt}" loading="lazy" />`
+      : `<div class="ph" style="background:${color}">${label}</div>`;
+
+    const initials = t => t.split(/[\s—-]+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
+
+    function embed(url) {
+      let m = url.match(/(?:youtu\.be\/|v=|shorts\/)([\w-]{11})/);
+      if (m) return `https://www.youtube-nocookie.com/embed/${m[1]}`;
+      m = url.match(/vimeo\.com\/(\d+)/);
+      if (m) return `https://player.vimeo.com/video/${m[1]}`;
+      return url;
+    }
+
+    // Tarjetas
+    grid.innerHTML = proyectos.map((p, i) => `
+      ${i === 0 ? `<p class="grid-label first">Clientes</p>` : ""}${i === 2 ? `<p class="grid-label">Proyectos académicos y personales</p>` : ""}<button class="card ${i < 2 ? "feat" : "half"}" data-cat="${p.categoria}" data-i="${i}">
+        <div class="thumb">${visual(p.imagen, p.color, initials(p.titulo), p.titulo)}${p.textoPortada ? `<span class="cover-text${p.textoAbajo ? " bottom" : ""}${p.textoBajoLogo ? " under-logo" : ""}${p.textoLargo ? " long" : ""}">${p.textoPortada}</span>` : ""}</div>
+        <div class="card-meta">
+          <span class="num">${String(i + 1).padStart(2, "0")}</span>
+          <h3>${p.titulo}</h3>
+          <span class="tag">${p.categoria}${p.año ? " · " + p.año : ""}</span>
+        </div>
+      </button>`).join("");
+
+    // Aparición al hacer scroll
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }), { threshold: 0.12 });
+    grid.querySelectorAll(".card").forEach(c => io.observe(c));
+
+    // Filtros
+    const cats = ["Todo", ...new Set(proyectos.map(p => p.categoria))];
+    filters.innerHTML = cats.map((c, i) => `<button class="${i ? "" : "active"}" data-cat="${c}">${c}</button>`).join("");
+    filters.addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      filters.querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
+      grid.classList.toggle("filtered", btn.dataset.cat !== "Todo");
+      grid.querySelectorAll(".card").forEach(card =>
+        card.classList.toggle("hidden", btn.dataset.cat !== "Todo" && card.dataset.cat !== btn.dataset.cat));
+    });
+
+    // Detalle
+    function open(i) {
+      current = (i + proyectos.length) % proyectos.length;
+      const p = proyectos[current];
+      $("m-cat").textContent = `${String(current + 1).padStart(2, "0")} — ${p.categoria}`;
+      $("m-title").textContent = p.titulo;
+      $("m-info").innerHTML = `
+        <div><span class="label">Cliente</span><p>${p.cliente}</p></div>
+        <div><span class="label">Rol</span><p>${p.rol}</p></div>
+        ${p.año ? `<div><span class="label">Año</span><p>${p.año}</p></div>` : ""}
+        <div${p.año ? "" : ' class="wide-desc"'}><span class="label">Sobre el proyecto</span><p class="m-desc">${p.descripcion}</p>${p.cifra ? `<p class="m-cifra">${p.cifra}</p>` : ""}${p.enlace ? `<a class="pill primary m-link" href="${p.enlace}" target="_blank" rel="noopener">${p.enlaceTexto || "Ver proyecto"} ↗</a>` : ""}</div>`;
+      const video = p.video ? `<div class="video"><iframe src="${embed(p.video)}" title="${p.titulo}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>` : "";
+      const imgs = p.galeria.length ? p.galeria : (p.video ? [] : [p.imagen]);
+      $("m-gallery").style.gridTemplateColumns = p.columnas && innerWidth > 640 ? `repeat(${p.columnas}, 1fr)` : "";
+      $("m-gallery").classList.toggle("grid-mode", !!p.columnas);
+      $("m-gallery").classList.toggle("single", p.galeria.length === 1);
+      if (p.secciones) {
+        $("m-gallery").style.gridTemplateColumns = "";
+        $("m-gallery").classList.remove("grid-mode", "single");
+        $("m-gallery").innerHTML = p.secciones.filter(sec => (sec.imagenes || []).length || (sec.videos || []).length).map(sec => sec.videos ? `
+          <div class="m-sec">
+            <h4>${sec.titulo}</h4>${sec.texto ? `<p>${sec.texto}</p>` : ""}
+            <div class="vid-grid${sec.vertical ? " vertical" : ""}">${sec.videos.map(v => `<div><a class="player vid-link" href="${v.url}" target="_blank" rel="noopener" aria-label="Ver ${v.titulo} en YouTube">${v.portada ? `<img src="${v.portada}" alt="" loading="lazy" />` : `<span class="vid-ph">${v.titulo}</span>`}<span class="play"></span><span class="vid-yt">Ver en YouTube ↗</span></a><p class="vid-t">${v.titulo}</p></div>`).join("")}</div>
+          </div>` : `
+          <div class="m-sec">
+            <h4>${sec.titulo}</h4>${sec.texto ? `<p>${sec.texto}</p>` : ""}
+            <div class="gallery grid-mode${sec.ajuste === "contain" ? " contain" : ""}" style="${sec.ratio ? `--r:${sec.ratio};` : ""}grid-template-columns:${innerWidth > 640 ? `repeat(${sec.columnas || 3}, 1fr)` : (sec.columnas >= 2 ? "1fr 1fr" : "1fr")};padding-bottom:0">${(sec.imagenes || []).map(src => `<img src="${src}" alt="${sec.titulo}" loading="lazy" />`).join("")}</div>
+          </div>`).join("");
+      } else
+      $("m-gallery").innerHTML = video + imgs.map(src => visual(src, p.color, initials(p.titulo), p.titulo)).join("");
+      if (!modal.open) { modal.showModal(); document.body.style.overflow = "hidden"; }
+      modal.scrollTop = 0;
+    }
+    function close() { modal.close(); }
+    modal.addEventListener("close", () => { document.body.style.overflow = ""; $("m-gallery").innerHTML = ""; });
+
+    grid.addEventListener("click", e => { const c = e.target.closest(".card"); if (c) open(+c.dataset.i); });
+    $("m-close").addEventListener("click", close);
+    $("m-prev").addEventListener("click", () => open(current - 1));
+    $("m-next").addEventListener("click", () => open(current + 1));
+    document.addEventListener("keydown", e => {
+      if (!modal.open) return;
+      if (e.key === "ArrowRight") open(current + 1);
+      if (e.key === "ArrowLeft") open(current - 1);
+    });
+
+    const playVid = el => { if (el.querySelector("iframe")) return; const sep = el.dataset.src.includes("?") ? "&" : "?"; el.innerHTML = `<iframe src="${el.dataset.src}${sep}autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`; };
+    $("m-gallery").addEventListener("click", e => { const p = e.target.closest(".player"); if (p) playVid(p); });
+
+    // Header al hacer scroll
+    const header = $("header");
+    const onScroll = () => header.classList.toggle("scrolled", scrollY > 20);
+    addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+    $("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
