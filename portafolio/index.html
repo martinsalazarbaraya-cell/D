@@ -249,6 +249,12 @@
     .m-sec h4 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 28px; letter-spacing: -0.02em; }
     .m-sec p { margin: 0; color: var(--muted); max-width: 640px; }
     .gallery.contain img { object-fit: contain; background: var(--surface); }
+    .vid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .vid-grid.vertical { grid-template-columns: repeat(4, 1fr); }
+    .vid-grid.vertical .player { aspect-ratio: 9 / 16; }
+    .vid-grid .player { background: radial-gradient(circle at 50% 40%, #1b2a52, #070b16); }
+    .vid-t { margin: 10px 0 0; color: var(--text); font-size: 15px; }
+    @media (max-width: 640px) { .vid-grid { grid-template-columns: 1fr; } .vid-grid.vertical { grid-template-columns: 1fr 1fr; } }
     .m-link { margin-top: 20px; white-space: nowrap; }
     @media (min-width: 901px) { .m-info .wide-desc { grid-column: 3 / 5; } }
     .gallery.single img { max-width: 560px; margin: 0 auto; }
@@ -369,7 +375,6 @@
       <a href="#" class="logo"><i></i>Martín Salazar</a>
       <nav>
         <a href="#trabajo">Trabajo</a>
-        <a href="#audiovisual">Audiovisual</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#contacto" class="cta">Contacto</a>
       </nav>
@@ -433,19 +438,6 @@
       </div>
     </section>
 
-    <!-- ===== AUDIOVISUAL ===== -->
-    <section id="audiovisual" class="av">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="label">02 — Audiovisual</span>
-            <h2>Audiovisual</h2>
-          </div>
-        </div>
-        <div class="av-grid" id="av-grid"></div>
-      </div>
-    </section>
-
     <!-- ===== SOBRE MÍ ===== -->
     <section id="sobre-mi" class="about">
       <div class="container about-grid">
@@ -458,7 +450,7 @@
         </div>
         </div>
         <div>
-          <span class="label">03 — Sobre mí</span>
+          <span class="label">02 — Sobre mí</span>
           <h2>Sobre mí</h2>
           <p class="bio">[Escríbelo como se lo contarías a alguien en persona: cómo llegaste al diseño, qué es lo que más disfrutas hacer y qué estás buscando ahora.]</p>
           <div class="lists">
@@ -505,7 +497,7 @@
         <i class="cross" style="left:28px;top:28px"></i><i class="cross" style="right:28px;top:28px"></i>
       </div>
       <div class="container">
-        <span class="label">04 — Contacto</span>
+        <span class="label">03 — Contacto</span>
         <h2>Escríbeme.</h2>
         <a class="btn" href="mailto:hola@tunombre.com">hola@tunombre.com <span aria-hidden="true">→</span></a>
         <div class="socials">
@@ -662,6 +654,27 @@
         ancho: true
       },
       {
+        titulo: "Audiovisual",
+        categoria: "Audiovisual",
+        año: "",
+        cliente: "Universidad de los Andes · Marini Star",
+        rol: "Realización, edición y contenido en video",
+        descripcion: "Trabajos audiovisuales de la universidad y reels para redes de Marini Star.",
+        imagen: "assets/audiovisual/portada.jpg",
+        textoPortada: "Audiovisual",
+        secciones: [
+          { titulo: "Trabajos universitarios", texto: "[Título y descripción de cada video.]", videos: [
+            { titulo: "Video 1", url: "https://youtu.be/bpea2HG3o_g" },
+            { titulo: "Video 2", url: "https://youtu.be/vk-TcWrIGLk" }
+          ] },
+          { titulo: "Reels Marini Star", texto: "Reels para Instagram.", videos: [], vertical: true }
+        ],
+        galeria: [],
+        video: "",
+        color: "#0b1020",
+        ancho: true
+      },
+      {
         titulo: "Ciudades",
         categoria: "Fotografía",
         año: "",
@@ -744,10 +757,14 @@
       if (p.secciones) {
         $("m-gallery").style.gridTemplateColumns = "";
         $("m-gallery").classList.remove("grid-mode", "single");
-        $("m-gallery").innerHTML = p.secciones.filter(sec => sec.imagenes.length).map(sec => `
+        $("m-gallery").innerHTML = p.secciones.filter(sec => (sec.imagenes || []).length || (sec.videos || []).length).map(sec => sec.videos ? `
           <div class="m-sec">
             <h4>${sec.titulo}</h4>${sec.texto ? `<p>${sec.texto}</p>` : ""}
-            <div class="gallery grid-mode${sec.ajuste === "contain" ? " contain" : ""}" style="grid-template-columns:${innerWidth > 640 ? `repeat(${sec.columnas || 3}, 1fr)` : (sec.columnas >= 2 ? "1fr 1fr" : "1fr")};padding-bottom:0">${sec.imagenes.map(src => `<img src="${src}" alt="${sec.titulo}" loading="lazy" />`).join("")}</div>
+            <div class="vid-grid${sec.vertical ? " vertical" : ""}">${sec.videos.map(v => `<div><div class="player" data-src="${embed(v.url)}" role="button" tabindex="0" aria-label="Reproducir ${v.titulo}"><span class="play"></span></div><p class="vid-t">${v.titulo}</p></div>`).join("")}</div>
+          </div>` : `
+          <div class="m-sec">
+            <h4>${sec.titulo}</h4>${sec.texto ? `<p>${sec.texto}</p>` : ""}
+            <div class="gallery grid-mode${sec.ajuste === "contain" ? " contain" : ""}" style="grid-template-columns:${innerWidth > 640 ? `repeat(${sec.columnas || 3}, 1fr)` : (sec.columnas >= 2 ? "1fr 1fr" : "1fr")};padding-bottom:0">${(sec.imagenes || []).map(src => `<img src="${src}" alt="${sec.titulo}" loading="lazy" />`).join("")}</div>
           </div>`).join("");
       } else
       $("m-gallery").innerHTML = video + imgs.map(src => visual(src, p.color, initials(p.titulo), p.titulo)).join("");
@@ -767,51 +784,8 @@
       if (e.key === "ArrowLeft") open(current - 1);
     });
 
-    /* =====================================================
-       TUS VIDEOS — pega el link de YouTube o Vimeo.
-       El primero sale grande (destacado).
-       ===================================================== */
-    const videos = [
-      {
-        titulo: "Título del video",
-        tipo: "Cortometraje",
-        año: 2024,
-        descripcion: "De qué se trata y qué hiciste tú (guion, dirección, cámara, edición...).",
-        url: "https://youtu.be/bpea2HG3o_g"
-      },
-      {
-        titulo: "Título del video",
-        tipo: "Video",
-        año: 2024,
-        descripcion: "De qué se trata y qué hiciste tú.",
-        url: "https://youtu.be/vk-TcWrIGLk"
-      }
-    ];
-
-    const ytId = url => (url.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/) || [])[1];
-    $("av-grid").innerHTML = videos.map((v, i) => {
-      const id = ytId(v.url);
-      const thumb = v.portada || (id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : "");
-      return `
-      <div class="av-item${i === 0 ? " featured" : ""}">
-        <div class="player" data-src="${embed(v.url)}" role="button" tabindex="0" aria-label="Reproducir ${v.titulo}">
-          ${thumb ? `<img src="${thumb}" alt="" loading="lazy" onerror="this.remove()" />` : ""}<span class="play"></span>
-        </div>
-        <div class="av-meta">
-          <span class="num">${String(i + 1).padStart(2, "0")}</span>
-          <h3>${v.titulo}</h3>
-          <span class="tag">${v.tipo} · ${v.año}</span>
-        </div>
-        <p class="av-desc">${v.descripcion}</p>
-      </div>`;
-    }).join("");
-    const play = el => {
-      if (el.querySelector("iframe")) return;
-      const sep = el.dataset.src.includes("?") ? "&" : "?";
-      el.innerHTML = `<iframe src="${el.dataset.src}${sep}autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
-    };
-    $("av-grid").addEventListener("click", e => { const p = e.target.closest(".player"); if (p) play(p); });
-    $("av-grid").addEventListener("keydown", e => { const p = e.target.closest(".player"); if (p && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); play(p); } });
+    const playVid = el => { if (el.querySelector("iframe")) return; const sep = el.dataset.src.includes("?") ? "&" : "?"; el.innerHTML = `<iframe src="${el.dataset.src}${sep}autoplay=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`; };
+    $("m-gallery").addEventListener("click", e => { const p = e.target.closest(".player"); if (p) playVid(p); });
 
     // Header al hacer scroll
     const header = $("header");
