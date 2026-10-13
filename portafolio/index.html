@@ -248,6 +248,7 @@
     .m-sec { display: grid; gap: 16px; margin-bottom: 56px; }
     .m-sec h4 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 28px; letter-spacing: -0.02em; }
     .m-sec p { margin: 0; color: var(--muted); max-width: 640px; }
+    .gallery.contain img { object-fit: contain; background: var(--surface); }
     .m-link { margin-top: 20px; white-space: nowrap; }
     @media (min-width: 901px) { .m-info .wide-desc { grid-column: 3 / 5; } }
     .gallery.single img { max-width: 560px; margin: 0 auto; }
@@ -648,7 +649,7 @@
         textoPortada: "Marini Star",
         secciones: [
           { titulo: "Diseño de ropa", texto: "Estampados para camisetas: Vespa Tour Club en dos colores y una camiseta con bordados de estampillas inspiradas en Italia.", imagenes: ["assets/marini/vespa-blanco.jpg", "assets/marini/vespa-azul.jpg", "assets/marini/bordados.jpg"] },
-          { titulo: "Posts y diseño gráfico", texto: "", imagenes: [] },
+          { titulo: "Posts y diseño gráfico", texto: "Piezas para Instagram: lanzamientos de producto, detalles de estampados, un catálogo de outfits y una pieza de tendencia.", imagenes: ["assets/marini/post-1.jpg", "assets/marini/post-2.jpg", "assets/marini/post-3.jpg", "assets/marini/post-4.jpg", "assets/marini/post-5.jpg"], ajuste: "contain" },
           { titulo: "Fotografía", texto: "Fotos de la sesión de producto 2025.", imagenes: ["assets/marini/sesion-1.jpg", "assets/marini/sesion-2.jpg", "assets/marini/sesion-3.jpg"] }
         ],
         galeria: [],
@@ -742,7 +743,7 @@
         $("m-gallery").innerHTML = p.secciones.filter(sec => sec.imagenes.length).map(sec => `
           <div class="m-sec">
             <h4>${sec.titulo}</h4>${sec.texto ? `<p>${sec.texto}</p>` : ""}
-            <div class="gallery grid-mode" style="grid-template-columns:${innerWidth > 640 ? "repeat(3, 1fr)" : "1fr"};padding-bottom:0">${sec.imagenes.map(src => `<img src="${src}" alt="${sec.titulo}" loading="lazy" />`).join("")}</div>
+            <div class="gallery grid-mode${sec.ajuste === "contain" ? " contain" : ""}" style="grid-template-columns:${innerWidth > 640 ? "repeat(3, 1fr)" : "1fr"};padding-bottom:0">${sec.imagenes.map(src => `<img src="${src}" alt="${sec.titulo}" loading="lazy" />`).join("")}</div>
           </div>`).join("");
       } else
       $("m-gallery").innerHTML = video + imgs.map(src => visual(src, p.color, initials(p.titulo), p.titulo)).join("");
